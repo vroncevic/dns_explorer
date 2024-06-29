@@ -1,0 +1,12 @@
+name: dns_explorer_toc
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '**.md'
+jobs:
+  generateTOC:
+    name: dns_explorer_toc
+    runs-on: ubuntu-latest
+    steps:
+      - uses: technote-space/toc-generator@v4
