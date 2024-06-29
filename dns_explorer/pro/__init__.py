@@ -44,7 +44,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/dns_explorer'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE'
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -186,6 +186,9 @@ class DNSProcessor(FileCheck, ProConfig):
             raise ATSValueError('set cluster number')
         if not bool(self.config):
             return False
+        success_message([
+            f'\n{self._TOOL_VERBOSE.lower()} Checking dns {domain}\n'
+        ])
         for sub_domain in self.config['subdomains']:
             sub_domain_final: str = f'{sub_domain}.{domain}'
             self._dns_request(sub_domain_final, verbose)
