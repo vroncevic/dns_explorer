@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Check explorer &#8212; dns_explorer https://github.com/vroncevic/dns_explorer/releases documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=514cf933" />
+    
+    <script src="_static/documentation_options.js?v=8a5c6298"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dns_explorer" href="modules.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="dns_explorer"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">dns_explorer https://github.com/vroncevic/dns_explorer/releases documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Check explorer</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="check-explorer">
+<h1>Check explorer<a class="headerlink" href="#check-explorer" title="Link to this heading">¶</a></h1>
+<p><strong>dns_explorer</strong> is toolset for checking DNS.</p>
+<p>Developed in <a class="reference external" href="https://www.python.org/">python</a> code.</p>
+<p>The README is used to introduce the tool and provide instructions on
+how to install the tool, any machine dependencies it may have and any
+other information that should be provided before the tool is installed.</p>
+<p><a class="reference external" href="https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_python_checker.yml"><img alt="dns_explorer python checker" src="https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_python_checker.yml/badge.svg" /></a> <a class="reference external" href="https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_package.yml"><img alt="dns_explorer python package" src="https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_package_checker.yml/badge.svg" /></a> <a class="reference external" href="https://github.com/vroncevic/dns_explorer/issues"><img alt="github issues" src="https://img.shields.io/github/issues/vroncevic/dns_explorer.svg" /></a> <a class="reference external" href="https://dns-explorer.readthedocs.io/en/latest/?badge=latest"><img alt="documentation status" src="https://readthedocs.org/projects/dns_explorer/badge/?version=latest" /></a> <a class="reference external" href="https://github.com/vroncevic/dns_explorer/graphs/contributors"><img alt="github contributors" src="https://img.shields.io/github/contributors/vroncevic/dns_explorer.svg" /></a></p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Check explorer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">dns_explorer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dns_explorer.html">dns_explorer package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dns_explorer.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dns_explorer.pro.html">dns_explorer.pro package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="dns_explorer.html#module-dns_explorer">Module contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dns_explorer.html#dns_explorer.DNSExplorer"><code class="docutils literal notranslate"><span class="pre">DNSExplorer</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h1>
+<p><a class="reference external" href="https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_python3_build.yml"><img alt="dns_explorer python3 build" src="https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_python3_build.yml/badge.svg" /></a></p>
+<p>Navigate to release <a class="reference external" href="https://github.com/vroncevic/dns_explorer/releases">page</a> download and extract release archive.</p>
+<p>To install <strong>dns_explorer</strong> type the following</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar<span class="w"> </span>xvzf<span class="w"> </span>dns_explorer-x.y.z.tar.gz
+<span class="nb">cd</span><span class="w"> </span>dns_explorer-x.y.z/
+<span class="c1"># python3</span>
+wget<span class="w"> </span>https://bootstrap.pypa.io/get-pip.py
+python3<span class="w"> </span>get-pip.py
+python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>setuptools
+python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>build
+pip3<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+python3<span class="w"> </span>-m<span class="w"> </span>build<span class="w"> </span>--no-isolation<span class="w"> </span>--wheel
+pip3<span class="w"> </span>install<span class="w"> </span>./dist/dns_explorer-*-py3-none-any.whl
+rm<span class="w"> </span>-f<span class="w"> </span>get-pip.py
+chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>/usr/local/lib/python3.10/dist-packages/usr/local/bin/dns_explorer_run.py
+ln<span class="w"> </span>-s<span class="w"> </span>/usr/local/lib/python3.10/dist-packages/usr/local/bin/dns_explorer_run.py<span class="w"> </span>/usr/local/bin/dns_explorer_run.py
+</pre></div>
+</div>
+<p>You can use Docker to create image/container, or You can use pip to install</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># pyton3</span>
+pip3<span class="w"> </span>install<span class="w"> </span>dns_explorer
+</pre></div>
+</div>
+</section>
+<section id="dependencies">
+<h1>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">¶</a></h1>
+<p><strong>dns_explorer</strong> requires next modules and libraries</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pypi.org/project/ats-utilities/">ats-utilities - Python App/Tool/Script Utilities</a></p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/dnspython/">dnspython - DNS toolkit for Python</a></p></li>
+</ul>
+</section>
+<section id="tool-structure">
+<h1>Tool structure<a class="headerlink" href="#tool-structure" title="Link to this heading">¶</a></h1>
+<p><strong>dns_explorer</strong> is based on OOP.</p>
+<p>Tool structure</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dns_explorer/
+<span class="w">     </span>├──<span class="w"> </span>conf/
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>dns_explorer.cfg
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>dns_explorer.logo
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>dns_explorer_util.cfg
+<span class="w">     </span>│<span class="w">   </span>└──<span class="w"> </span>subdomains.yaml
+<span class="w">     </span>├──<span class="w"> </span>__init__.py
+<span class="w">     </span>├──<span class="w"> </span>log/
+<span class="w">     </span>│<span class="w">   </span>└──<span class="w"> </span>dns_explorer.log
+<span class="w">     </span>├──<span class="w"> </span>pro/
+<span class="w">     </span>│<span class="w">   </span>└──<span class="w"> </span>__init__.py
+<span class="w">     </span>└──<span class="w"> </span>run/
+<span class="w">         </span>└──<span class="w"> </span>dns_explorer_run.py
+
+<span class="m">5</span><span class="w"> </span>directories,<span class="w"> </span><span class="m">8</span><span class="w"> </span>files
+</pre></div>
+</div>
+</section>
+<section id="copyright-and-licence">
+<h1>Copyright and licence<a class="headerlink" href="#copyright-and-licence" title="Link to this heading">¶</a></h1>
+<p><a class="reference external" href="https://www.gnu.org/licenses/gpl-3.0"><img alt="license: gpl v3" src="https://img.shields.io/badge/license-gplv3-blue.svg" /></a> <a class="reference external" href="https://opensource.org/licenses/apache-2.0"><img alt="license: apache 2.0" src="https://img.shields.io/badge/license-apache%202.0-blue.svg" /></a></p>
+<p>Copyright (C) 2024 by <a class="reference external" href="https://vroncevic.github.io/dns_explorer">vroncevic.github.io/dns_explorer</a></p>
+<p><strong>dns_explorer</strong> is free software; you can redistribute it and/or modify
+it under the same terms as Python itself, either Python version 3.x or,
+at your option, any later version of Python 3 you may have available.</p>
+<p>Lets help and support PSF.</p>
+<p><a class="reference external" href="https://www.python.org/psf/"><img alt="python software foundation" src="https://raw.githubusercontent.com/vroncevic/dns_explorer/dev/docs/psf-logo-alpha.png" /></a></p>
+<p><a class="reference external" href="https://www.python.org/psf/donations/"><img alt="donate" src="https://www.paypalobjects.com/en_us/i/btn/btn_donatecc_lg.gif" /></a></p>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="#">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Check explorer</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#tool-structure">Tool structure</a></li>
+<li><a class="reference internal" href="#copyright-and-licence">Copyright and licence</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="modules.html"
+                          title="next chapter">dns_explorer</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modules.html" title="dns_explorer"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">dns_explorer https://github.com/vroncevic/dns_explorer/releases documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Check explorer</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>
