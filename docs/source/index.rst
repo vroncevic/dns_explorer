@@ -89,20 +89,21 @@ Tool structure
 .. code-block:: bash
 
     dns_explorer/
-         ├── conf/
-         │   ├── dns_explorer.cfg
-         │   ├── dns_explorer.logo
-         │   ├── dns_explorer_util.cfg
-         │   └── subdomains.yaml
-         ├── __init__.py
-         ├── log/
-         │   └── dns_explorer.log
-         ├── pro/
-         │   └── __init__.py
-         └── run/
-             └── dns_explorer_run.py
+          ├── conf/
+          │   ├── dns_explorer.cfg
+          │   ├── dns_explorer.logo
+          │   ├── dns_explorer_util.cfg
+          │   └── subdomains.yaml
+          ├── __init__.py
+          ├── log/
+          │   └── dns_explorer.log
+          ├── pro/
+          │   └── __init__.py
+          ├── py.typed
+          └── run/
+              └── dns_explorer_run.py
     
-    5 directories, 8 files
+    5 directories, 9 files
 
 Copyright and licence
 -----------------------

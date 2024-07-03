@@ -60,7 +60,7 @@
 <span class="sd">&#39;&#39;&#39;</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
 <span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">realpath</span>
 <span class="kn">from</span> <span class="nn">re</span> <span class="kn">import</span> <span class="n">search</span><span class="p">,</span> <span class="n">Match</span>
 <span class="kn">from</span> <span class="nn">socket</span> <span class="kn">import</span> <span class="n">gethostbyaddr</span><span class="p">,</span> <span class="n">herror</span>
@@ -83,7 +83,7 @@
 <span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;(C) 2024, https://vroncevic.github.io/dns_explorer&#39;</span>
 <span class="n">__credits__</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Vladimir Roncevic&#39;</span><span class="p">,</span> <span class="s1">&#39;Python Software Foundation&#39;</span><span class="p">]</span>
 <span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE&#39;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.0.1&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.0.2&#39;</span>
 <span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
 <span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;elektron.ronca@gmail.com&#39;</span>
 <span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Updated&#39;</span>
@@ -135,7 +135,9 @@
 
 <div class="viewcode-block" id="DNSProcessor._reverse_dns">
 <a class="viewcode-back" href="../../dns_explorer.pro.html#dns_explorer.pro.DNSProcessor._reverse_dns">[docs]</a>
-    <span class="k">def</span> <span class="nf">_reverse_dns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_reverse_dns</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            Reverse DNS by IP address.</span>
 
@@ -144,11 +146,11 @@
 <span class="sd">            :param verbose: Enable/Disable verbose option</span>
 <span class="sd">            :type verbose: &lt;bool&gt;</span>
 <span class="sd">            :return: List of dns names | None</span>
-<span class="sd">            :rtype: &lt;List[str]&gt; | &lt;NoneType&gt;</span>
+<span class="sd">            :rtype: &lt;Optional[List[str]]&gt;</span>
 <span class="sd">            :exceptions: ATSTypeError | ATSValueError</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">error_msg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="n">error_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">error_msg</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">error_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">error_msg</span><span class="p">,</span> <span class="n">error_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_params</span><span class="p">([(</span><span class="s1">&#39;str:ip&#39;</span><span class="p">,</span> <span class="n">ip</span><span class="p">)])</span>
         <span class="k">if</span> <span class="n">error_id</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">TYPE_ERROR</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ATSTypeError</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
@@ -176,8 +178,8 @@
 <span class="sd">            :type verbose: &lt;bool&gt;</span>
 <span class="sd">            :exceptions: ATSTypeError | ATSValueError</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">error_msg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="n">error_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">error_msg</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">error_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">error_msg</span><span class="p">,</span> <span class="n">error_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_params</span><span class="p">([(</span><span class="s1">&#39;str:domain&#39;</span><span class="p">,</span> <span class="n">domain</span><span class="p">)])</span>
         <span class="k">if</span> <span class="n">error_id</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">TYPE_ERROR</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">ATSTypeError</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
@@ -186,7 +188,7 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">result</span><span class="p">:</span> <span class="n">Answer</span> <span class="o">=</span> <span class="n">resolve</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
-                <span class="n">ip_address</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="n">ip_address</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
                 <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\b(?:[0-9]{1,3}\.)</span><span class="si">{3}</span><span class="s1">[0-9]{1,3}\b&#39;</span>
                 <span class="n">match</span><span class="p">:</span> <span class="n">Match</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">rrset</span><span class="p">))</span>
                 <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
@@ -222,8 +224,8 @@
 <span class="sd">            :rtype: &lt;bool&gt;</span>
 <span class="sd">            :exceptions: ATSTypeError | ATSValueError</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">error_msg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="n">error_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">error_msg</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">error_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">error_msg</span><span class="p">,</span> <span class="n">error_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_params</span><span class="p">([</span>
             <span class="p">(</span><span class="s1">&#39;str:domain&#39;</span><span class="p">,</span> <span class="n">domain</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;int:cluster&#39;</span><span class="p">,</span> <span class="n">cluster</span><span class="p">)</span>
         <span class="p">])</span>

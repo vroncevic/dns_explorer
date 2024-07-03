@@ -21,7 +21,7 @@ Info
 '''
 
 import sys
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 from os.path import dirname, realpath
 from re import search, Match
 from socket import gethostbyaddr, herror
@@ -44,7 +44,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/dns_explorer'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE'
-__version__ = '1.0.1'
+__version__ = '1.0.2'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -92,7 +92,9 @@ class DNSProcessor(FileCheck, ProConfig):
             yml2obj = Yaml2Object(net_config)
             self.config = yml2obj.read_configuration()
 
-    def _reverse_dns(self, ip: str, verbose: bool = False) -> List[str] | None:
+    def _reverse_dns(
+        self, ip: str, verbose: bool = False
+    ) -> Optional[List[str]]:
         '''
             Reverse DNS by IP address.
 
@@ -101,11 +103,11 @@ class DNSProcessor(FileCheck, ProConfig):
             :param verbose: Enable/Disable verbose option
             :type verbose: <bool>
             :return: List of dns names | None
-            :rtype: <List[str]> | <NoneType>
+            :rtype: <Optional[List[str]]>
             :exceptions: ATSTypeError | ATSValueError
         '''
-        error_msg: str | None = None
-        error_id: int | None = None
+        error_msg: Optional[str] = None
+        error_id: Optional[int] = None
         error_msg, error_id = self.check_params([('str:ip', ip)])
         if error_id == self.TYPE_ERROR:
             raise ATSTypeError(error_msg)
@@ -130,8 +132,8 @@ class DNSProcessor(FileCheck, ProConfig):
             :type verbose: <bool>
             :exceptions: ATSTypeError | ATSValueError
         '''
-        error_msg: str | None = None
-        error_id: int | None = None
+        error_msg: Optional[str] = None
+        error_id: Optional[int] = None
         error_msg, error_id = self.check_params([('str:domain', domain)])
         if error_id == self.TYPE_ERROR:
             raise ATSTypeError(error_msg)
@@ -140,7 +142,7 @@ class DNSProcessor(FileCheck, ProConfig):
         try:
             result: Answer = resolve(domain)
             if result:
-                ip_address: str | None = None
+                ip_address: Optional[str] = None
                 pattern: str = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
                 match: Match[str] | None = search(pattern, str(result.rrset))
                 if match:
@@ -173,8 +175,8 @@ class DNSProcessor(FileCheck, ProConfig):
             :rtype: <bool>
             :exceptions: ATSTypeError | ATSValueError
         '''
-        error_msg: str | None = None
-        error_id: int | None = None
+        error_msg: Optional[str] = None
+        error_id: Optional[int] = None
         error_msg, error_id = self.check_params([
             ('str:domain', domain), ('int:cluster', cluster)
         ])
