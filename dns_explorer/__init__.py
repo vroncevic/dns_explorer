@@ -28,7 +28,7 @@ from argparse import Namespace
 try:
     from ats_utilities.splash import Splash
     from ats_utilities.logging import ATSLogger
-    from ats_utilities.cli.cfg_cli import CfgCLI
+    from ats_utilities.cli import ATSCli
     from ats_utilities.console_io.error import error_message
     from ats_utilities.console_io.verbose import verbose_message
     from ats_utilities.console_io.success import success_message
@@ -41,13 +41,13 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/dns_explorer'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE'
-__version__ = '1.0.2'
+__version__ = '1.0.3'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
 
 
-class DNSExplorer(CfgCLI):
+class DNSExplorer(ATSCli):
     '''
         Defines class DNSExplorer with attribute(s) and method(s).
         Loads a base info, creates a CLI interface and run operations.
@@ -97,9 +97,9 @@ class DNSExplorer(CfgCLI):
             verbose, [f'{self._TOOL_VERBOSE.lower()} init tool info']
         )
         self._logger: ATSLogger = ATSLogger(
-            self._TOOL_VERBOSE.lower(), f'{current_dir}{self._LOG}', verbose
+            self._TOOL_VERBOSE.lower(), True, None, True, verbose
         )
-        if self.tool_operational:
+        if self.is_operational():
             self.add_new_option(
                 self._OPS[0], self._OPS[1], dest='domain',
                 help='Domain name (provide name)'
@@ -124,7 +124,7 @@ class DNSExplorer(CfgCLI):
             :exceptions: None
         '''
         status: bool = False
-        if self.tool_operational:
+        if self.is_operational():
             try:
                 args: Any | Namespace = self.parse_args(sys.argv)
                 if not bool(getattr(args, 'domain')):
@@ -158,7 +158,10 @@ class DNSExplorer(CfgCLI):
                 )
             except SystemExit:
                 error_message(
-                    [f'{self._TOOL_VERBOSE.lower()} expected argument -d']
+                    [
+                        f'{self._TOOL_VERBOSE.lower()}'
+                        'expected arguments domain and cluster number'
+                    ]
                 )
                 return status
         else:

@@ -128,6 +128,14 @@ Tool structure
     5 directories, 9 files
 ```
 
+### Code coverage
+
+| Name | Stmts | Miss | Cover |
+|------|-------|------|-------|
+| `dns_explorer/__init__.py` | 61 | 9 | 85% |
+| `dns_explorer/pro/__init__.py` | 96 | 12 | 88% |
+| **Total** | 157 | 21 | 87% |
+
 ### Docs
 
 [![Documentation Status](https://readthedocs.org/projects/dns_explorer/badge/?version=latest)](https://dns-explorer.readthedocs.io/en/latest/?badge=latest)
