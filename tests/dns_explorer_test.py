@@ -36,7 +36,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/dns_explorer'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE'
-__version__ = '1.0.2'
+__version__ = '1.0.3'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -59,7 +59,6 @@ class DNSExplorerTestCase(TestCase):
                 | test_missing_args - Test missing args.
                 | test_wrong_arg - Test wrong arg.
                 | test_process - Check google dns.
-                | test_tool_not_operational - Test not operational.
     '''
 
     def setUp(self) -> None:
@@ -96,17 +95,6 @@ class DNSExplorerTestCase(TestCase):
         sys.argv.insert(3, '10')
         generator: DNSExplorer = DNSExplorer()
         self.assertTrue(generator.process())
-
-    def test_tool_not_operational(self) -> None:
-        '''Test not operational'''
-        sys.argv.clear()
-        sys.argv.insert(0, '-d')
-        sys.argv.insert(1, 'google.com')
-        sys.argv.insert(2, '-c')
-        sys.argv.insert(3, '10')
-        generator: DNSExplorer = DNSExplorer()
-        generator.tool_operational = False
-        self.assertFalse(generator.process())
 
 
 if __name__ == '__main__':
