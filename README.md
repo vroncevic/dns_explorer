@@ -23,6 +23,7 @@ other information that should be provided before the modules are installed.
     - [Install using docker](#install-using-docker)
 - [Dependencies](#dependencies)
 - [Tool structure](#tool-structure)
+- [Code coverage](#code-coverage)
 - [Docs](#docs)
 - [Contributing](#contributing)
 - [Copyright and licence](#copyright-and-licence)
@@ -132,9 +133,9 @@ Tool structure
 
 | Name | Stmts | Miss | Cover |
 |------|-------|------|-------|
-| `dns_explorer/__init__.py` | 61 | 9 | 85% |
-| `dns_explorer/pro/__init__.py` | 96 | 12 | 88% |
-| **Total** | 157 | 21 | 87% |
+| `dns_explorer/__init__.py` | 59 | 7 | 88%|
+| `dns_explorer/pro/__init__.py` | 94 | 10 | 89%|
+| **Total** | 153 | 17 | 89% |
 
 ### Docs
 
@@ -153,7 +154,7 @@ More documentation and info at
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Copyright (C) 2024 by [vroncevic.github.io/dns_explorer](https://vroncevic.github.io/dns_explorer)
+Copyright (C) 2024 - 2026 by [vroncevic.github.io/dns_explorer](https://vroncevic.github.io/dns_explorer)
 
 **dns_explorer** is free software; you can redistribute it and/or modify
 it under the same terms as Python itself, either Python version 3.x or,

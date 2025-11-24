@@ -8,9 +8,11 @@
 #
 
 rm -rf htmlcov dns_explorer_coverage.xml dns_explorer_coverage.json .coverage
-ats_coverage_run.py -n dns_explorer -p ../README.md
 python3 -m coverage run -m --source=../dns_explorer unittest discover -s ./ -p '*_test.py' -vvv
 python3 -m coverage html -d htmlcov
 python3 -m coverage xml -o dns_explorer_coverage.xml 
 python3 -m coverage json -o dns_explorer_coverage.json
 python3 -m coverage report --format=markdown -m
+python3 ats_coverage.py -n dns_explorer
+rm htmlcov/.gitignore
+echo "Done"
