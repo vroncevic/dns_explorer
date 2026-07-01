@@ -24,6 +24,7 @@ other information that should be provided before the modules are installed.
 - [Dependencies](#dependencies)
 - [Tool structure](#tool-structure)
 - [Code coverage](#code-coverage)
+- [Usage](#usage)
 - [Docs](#docs)
 - [Contributing](#contributing)
 - [Copyright and licence](#copyright-and-licence)
@@ -110,32 +111,116 @@ You can use Dockerfile to create image/container.
 
 Tool structure
 
+<details>
+<summary><b>Click to expand framework structure</b></summary>
+
 ```bash
     dns_explorer/
-          ├── conf/
-          │   ├── dns_explorer.cfg
-          │   ├── dns_explorer.logo
-          │   ├── dns_explorer_util.cfg
-          │   └── subdomains.yaml
-          ├── __init__.py
-          ├── log/
-          │   └── dns_explorer.log
-          ├── pro/
-          │   └── __init__.py
-          ├── py.typed
-          └── run/
-              └── dns_explorer_run.py
-    
-    5 directories, 9 files
+         ├── application/
+         │   ├── __init__.py
+         │   └── service.py
+         ├── dns_explorer_bundle.py
+         ├── domain/
+         │   ├── __init__.py
+         │   ├── models.py
+         │   └── ports/
+         │       ├── idns_resolver.py
+         │       ├── __init__.py
+         │       └── iservice.py
+         ├── engine.py
+         ├── infrastructure/
+         │   ├── cli.py
+         │   ├── cli_bundle.py
+         │   ├── config/
+         │   │   ├── dns_explorer.cfg
+         │   │   └── dns_explorer.logo
+         │   ├── dns_resolver.py
+         │   ├── explore_command.py
+         │   ├── icli.py
+         │   ├── icli_command.py
+         │   ├── __init__.py
+         │   ├── records_command.py
+         │   ├── resolve_command.py
+         │   └── reverse_command.py
+         └── __init__.py
+
+     6 directories, 22 files
 ```
+</details>
 
 ### Code coverage
 
+<details>
+<summary><b>Click to expand code coverage</b></summary>
+
 | Name | Stmts | Miss | Cover |
 |------|-------|------|-------|
-| `dns_explorer/__init__.py` | 59 | 7 | 88%|
-| `dns_explorer/pro/__init__.py` | 94 | 10 | 89%|
-| **Total** | 153 | 17 | 89% |
+| `dns_explorer/__init__.py` | 8 | 0 | 100%|
+| `dns_explorer/application/__init__.py` | 8 | 0 | 100%|
+| `dns_explorer/application/service.py` | 69 | 0 | 100%|
+| `dns_explorer/dns_explorer_bundle.py` | 37 | 0 | 100%|
+| `dns_explorer/domain/__init__.py` | 8 | 0 | 100%|
+| `dns_explorer/domain/models.py` | 18 | 0 | 100%|
+| `dns_explorer/domain/ports/__init__.py` | 8 | 0 | 100%|
+| `dns_explorer/domain/ports/idns_resolver.py` | 10 | 0 | 100%|
+| `dns_explorer/domain/ports/iservice.py` | 11 | 0 | 100%|
+| `dns_explorer/engine.py` | 62 | 0 | 100%|
+| `dns_explorer/infrastructure/__init__.py` | 8 | 0 | 100%|
+| `dns_explorer/infrastructure/cli.py` | 36 | 0 | 100%|
+| `dns_explorer/infrastructure/cli_bundle.py` | 33 | 0 | 100%|
+| `dns_explorer/infrastructure/dns_resolver.py` | 66 | 0 | 100%|
+| `dns_explorer/infrastructure/explore_command.py` | 58 | 0 | 100%|
+| `dns_explorer/infrastructure/icli.py` | 11 | 0 | 100%|
+| `dns_explorer/infrastructure/icli_command.py` | 14 | 0 | 100%|
+| `dns_explorer/infrastructure/records_command.py` | 55 | 0 | 100%|
+| `dns_explorer/infrastructure/resolve_command.py` | 60 | 0 | 100%|
+| `dns_explorer/infrastructure/reverse_command.py` | 54 | 0 | 100%|
+| **Total** | 634 | 0 | 100% |
+
+</details>
+
+### Usage
+
+Install package
+
+```bash
+pip3 install armpicom
+```
+
+Prepare main entry point by downloading [main.py](https://raw.githubusercontent.com/vroncevic/armpicom/main/main.py) or create your own.
+
+
+```bash
+wget -O main.py https://raw.githubusercontent.com/vroncevic/armpicom/main/main.py
+```
+
+Running tool for DNS exploring
+
+```bash
+# Use case 1: Standard domain scan (no cluster variations, non-verbose)
+echo "=== Running Use Case 1: Standard scan for google.com ==="
+python3 main.py explore --domain google.com
+
+# Use case 2: Scan with cluster variations (size 1)
+echo "=== Running Use Case 2: Scan for google.com with cluster size 1 ==="
+python3 main.py explore --domain google.com --cluster 1
+
+# Use case 3: Scan with cluster size 2 and verbose logging enabled
+echo "=== Running Use Case 3: Verbose scan for google.com with cluster size 2 ==="
+python3 main.py explore --domain google.com --cluster 2 --verbose True
+
+# Use case 4: Query domain DNS records (A, AAAA, MX, NS, TXT, SOA)
+echo "=== Running Use Case 4: DNS Records query for google.com ==="
+python3 main.py records --domain google.com
+
+# Use case 5: Resolve forward IP and reverse hostnames for a single domain name
+echo "=== Running Use Case 5: Resolve single domain google.com ==="
+python3 main.py resolve --domain google.com --verbose True
+
+# Use case 6: Query reverse DNS hostnames for an IP address
+echo "=== Running Use Case 6: Query reverse DNS for IP 8.8.8.8 ==="
+python3 main.py reverse --ip 8.8.8.8
+```
 
 ### Docs
 

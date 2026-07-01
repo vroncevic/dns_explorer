@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dns_explorer.application.service &#8212; dns_explorer https://github.com/vroncevic/dns_explorer/releases documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/classic.css?v=514cf933" />
+    
+    <script src="../../../_static/documentation_options.js?v=8a5c6298"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">dns_explorer https://github.com/vroncevic/dns_explorer/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">dns_explorer.application.service</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for dns_explorer.application.service</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: UTF-8 -*-</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Module</span>
+<span class="sd">    service.py</span>
+<span class="sd">Copyright</span>
+<span class="sd">    Copyright (C) 2026 Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;</span>
+<span class="sd">    dns_explorer is free software: you can redistribute it and/or modify it</span>
+<span class="sd">    under the terms of the GNU General Public License as published by the</span>
+<span class="sd">    Free Software Foundation, either version 3 of the License, or</span>
+<span class="sd">    (at your option) any later version.</span>
+<span class="sd">    dns_explorer is distributed in the hope that it will be useful, but</span>
+<span class="sd">    WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="sd">    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span>
+<span class="sd">    See the GNU General Public License for more details.</span>
+<span class="sd">    You should have received a copy of the GNU General Public License along</span>
+<span class="sd">    with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="sd">Info</span>
+<span class="sd">    Service for orchestrating the tool execution process.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">override</span>
+<span class="kn">from</span> <span class="nn">dns_explorer.domain.ports.iservice</span> <span class="kn">import</span> <span class="n">IService</span>
+<span class="kn">from</span> <span class="nn">dns_explorer.domain.ports.idns_resolver</span> <span class="kn">import</span> <span class="n">IDNSResolver</span>
+<span class="kn">from</span> <span class="nn">dns_explorer.domain.models</span> <span class="kn">import</span> <span class="n">ResolvedDomain</span><span class="p">,</span> <span class="n">DNSRecord</span>
+
+<span class="n">__author__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
+<span class="n">__copyright__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;(C) 2026, https://vroncevic.github.io/dns_explorer&#39;</span>
+<span class="n">__credits__</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Vladimir Roncevic&#39;</span><span class="p">,</span> <span class="s1">&#39;Python Software Foundation&#39;</span><span class="p">]</span>
+<span class="n">__license__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE&#39;</span>
+<span class="n">__version__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;1.0.5&#39;</span>
+<span class="n">__maintainer__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
+<span class="n">__email__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;elektron.ronca@gmail.com&#39;</span>
+<span class="n">__status__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Development&#39;</span>
+
+
+<div class="viewcode-block" id="Service">
+<a class="viewcode-back" href="../../../dns_explorer.application.service.html#dns_explorer.application.service.Service">[docs]</a>
+<span class="k">class</span> <span class="nc">Service</span><span class="p">(</span><span class="n">IService</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Service for orchestrating the tool execution process.</span>
+
+<span class="sd">        It defines:</span>
+
+<span class="sd">            :attributes:</span>
+<span class="sd">                | _dns_resolver - Adapter for DNS resolution operations.</span>
+<span class="sd">                | _SUBDOMAINS - List of _SUBDOMAINS to explore.</span>
+<span class="sd">            :methods:</span>
+<span class="sd">                | __init__ - Initializes the Service.</span>
+<span class="sd">                | explore - Explores DNS _SUBDOMAINS.</span>
+<span class="sd">                | check_dns - Executes dns request and reverse DNS lookup for a single domain.</span>
+<span class="sd">                | get_records - Queries various DNS records for a domain.</span>
+<span class="sd">                | reverse_resolve - Performs reverse DNS lookup on an IP address.</span>
+<span class="sd">                | is_initialized - Checks if the service and its adapters are initialized.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">_SUBDOMAINS</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;www&#39;</span><span class="p">,</span> <span class="s1">&#39;mail&#39;</span><span class="p">,</span> <span class="s1">&#39;remote&#39;</span><span class="p">,</span> <span class="s1">&#39;blog&#39;</span><span class="p">,</span> <span class="s1">&#39;webmail&#39;</span><span class="p">,</span> <span class="s1">&#39;server&#39;</span><span class="p">,</span> <span class="s1">&#39;ns&#39;</span><span class="p">,</span> <span class="s1">&#39;smtp&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;pop&#39;</span><span class="p">,</span> <span class="s1">&#39;imap&#39;</span><span class="p">,</span> <span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="s1">&#39;secure&#39;</span><span class="p">,</span> <span class="s1">&#39;vpn&#39;</span><span class="p">,</span> <span class="s1">&#39;dns&#39;</span><span class="p">,</span> <span class="s1">&#39;ftp&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;portal&#39;</span><span class="p">,</span> <span class="s1">&#39;host&#39;</span><span class="p">,</span> <span class="s1">&#39;support&#39;</span><span class="p">,</span> <span class="s1">&#39;dev&#39;</span><span class="p">,</span> <span class="s1">&#39;web&#39;</span><span class="p">,</span> <span class="s1">&#39;mx&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;cloud&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;owa&#39;</span><span class="p">,</span> <span class="s1">&#39;cdn&#39;</span><span class="p">,</span> <span class="s1">&#39;api&#39;</span><span class="p">,</span> <span class="s1">&#39;exchange&#39;</span><span class="p">,</span> <span class="s1">&#39;mysql&#39;</span><span class="p">,</span> <span class="s1">&#39;wiki&#39;</span><span class="p">,</span> <span class="s1">&#39;cpanel&#39;</span>
+    <span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dns_resolver</span><span class="p">:</span> <span class="n">IDNSResolver</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Initializes the Service.</span>
+
+<span class="sd">            :param dns_resolver: DNS resolver adapter.</span>
+<span class="sd">            :type dns_resolver: &lt;IDNSResolver | None&gt;</span>
+<span class="sd">            :exceptions:</span>
+<span class="sd">                | ValueError: DNS resolver must be provided.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">dns_resolver</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dns_resolver must be provided.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dns_resolver</span><span class="p">:</span> <span class="n">IDNSResolver</span> <span class="o">=</span> <span class="n">dns_resolver</span>
+
+<div class="viewcode-block" id="Service.explore">
+<a class="viewcode-back" href="../../../dns_explorer.application.service.html#dns_explorer.application.service.Service.explore">[docs]</a>
+    <span class="nd">@override</span>
+    <span class="k">def</span> <span class="nf">explore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">cluster</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">ResolvedDomain</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Explores _SUBDOMAINS of a domain and resolves their DNS and reverse DNS.</span>
+
+<span class="sd">            :param domain: Base domain name to explore.</span>
+<span class="sd">            :type domain: &lt;str&gt;</span>
+<span class="sd">            :param cluster: Number of _SUBDOMAINS in cluster to scan.</span>
+<span class="sd">            :type cluster: &lt;int&gt;</span>
+<span class="sd">            :param verbose: Enable/Disable verbose logging.</span>
+<span class="sd">            :type verbose: &lt;bool&gt;</span>
+<span class="sd">            :return: List of resolved domains.</span>
+<span class="sd">            :rtype: &lt;list[ResolvedDomain]&gt;</span>
+<span class="sd">            :exceptions:</span>
+<span class="sd">                | ValueError: domain must be provided.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">domain</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;domain must be provided.&quot;</span><span class="p">)</span>
+
+        <span class="n">results</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ResolvedDomain</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">sub_domain</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_SUBDOMAINS</span><span class="p">:</span>
+            <span class="n">sub_domain_final</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">sub_domain</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">domain</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_dns</span><span class="p">(</span><span class="n">sub_domain_final</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">cluster</span><span class="p">):</span>
+                <span class="n">sub_domain_multi</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">sub_domain</span><span class="si">}{</span><span class="n">i</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">domain</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_dns</span><span class="p">(</span><span class="n">sub_domain_multi</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
+                    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">results</span></div>
+
+
+<div class="viewcode-block" id="Service.check_dns">
+<a class="viewcode-back" href="../../../dns_explorer.application.service.html#dns_explorer.application.service.Service.check_dns">[docs]</a>
+    <span class="nd">@override</span>
+    <span class="k">def</span> <span class="nf">check_dns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ResolvedDomain</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Executes dns request and reverse DNS lookup.</span>
+
+<span class="sd">            :param domain: Domain name to check.</span>
+<span class="sd">            :type domain: &lt;str&gt;</span>
+<span class="sd">            :param verbose: Enable/Disable verbose option.</span>
+<span class="sd">            :type verbose: &lt;bool&gt;</span>
+<span class="sd">            :return: ResolvedDomain instance or None.</span>
+<span class="sd">            :rtype: &lt;ResolvedDomain | None&gt;</span>
+<span class="sd">            :exceptions: None.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ip_address</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dns_resolver</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">ip_address</span><span class="p">:</span>
+                <span class="n">dns_reverse</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dns_resolver</span><span class="o">.</span><span class="n">reverse_resolve</span><span class="p">(</span><span class="n">ip_address</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">dns_reverse</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">ResolvedDomain</span><span class="p">(</span>
+                        <span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">,</span>
+                        <span class="n">ip</span><span class="o">=</span><span class="n">ip_address</span><span class="p">,</span>
+                        <span class="n">reverse</span><span class="o">=</span><span class="n">dns_reverse</span>
+                    <span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="Service.get_records">
+<a class="viewcode-back" href="../../../dns_explorer.application.service.html#dns_explorer.application.service.Service.get_records">[docs]</a>
+    <span class="nd">@override</span>
+    <span class="k">def</span> <span class="nf">get_records</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">DNSRecord</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Queries various DNS records for a domain.</span>
+
+<span class="sd">            :param domain: Domain name.</span>
+<span class="sd">            :type domain: &lt;str&gt;</span>
+<span class="sd">            :return: List of DNS records.</span>
+<span class="sd">            :rtype: &lt;list[DNSRecord]&gt;</span>
+<span class="sd">            :exceptions:</span>
+<span class="sd">                | ValueError: domain must be provided.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">domain</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;domain must be provided.&quot;</span><span class="p">)</span>
+
+        <span class="n">record_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;AAAA&quot;</span><span class="p">,</span> <span class="s2">&quot;MX&quot;</span><span class="p">,</span> <span class="s2">&quot;NS&quot;</span><span class="p">,</span> <span class="s2">&quot;TXT&quot;</span><span class="p">,</span> <span class="s2">&quot;SOA&quot;</span><span class="p">]</span>
+        <span class="n">records</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">DNSRecord</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">r_type</span> <span class="ow">in</span> <span class="n">record_types</span><span class="p">:</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dns_resolver</span><span class="o">.</span><span class="n">resolve_record</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="n">r_type</span><span class="p">)</span>
+
+                <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+                    <span class="n">records</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DNSRecord</span><span class="p">(</span><span class="n">record_type</span><span class="o">=</span><span class="n">r_type</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">val</span><span class="p">))</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">records</span></div>
+
+
+<div class="viewcode-block" id="Service.reverse_resolve">
+<a class="viewcode-back" href="../../../dns_explorer.application.service.html#dns_explorer.application.service.Service.reverse_resolve">[docs]</a>
+    <span class="nd">@override</span>
+    <span class="k">def</span> <span class="nf">reverse_resolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Performs reverse DNS lookup on an IP address.</span>
+
+<span class="sd">            :param ip: IP address.</span>
+<span class="sd">            :type ip: &lt;str&gt;</span>
+<span class="sd">            :return: List of resolved hostnames.</span>
+<span class="sd">            :rtype: &lt;list[str]&gt;</span>
+<span class="sd">            :exceptions:</span>
+<span class="sd">                | ValueError: ip must be provided.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ip</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ip must be provided.&quot;</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dns_resolver</span><span class="o">.</span><span class="n">reverse_resolve</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">res</span> <span class="k">if</span> <span class="n">res</span> <span class="k">else</span> <span class="p">[]</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="Service.is_initialized">
+<a class="viewcode-back" href="../../../dns_explorer.application.service.html#dns_explorer.application.service.Service.is_initialized">[docs]</a>
+    <span class="nd">@override</span>
+    <span class="k">def</span> <span class="nf">is_initialized</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Checks if the service is initialized.</span>
+
+<span class="sd">            :return: True if the service is initialized, False otherwise.</span>
+<span class="sd">            :rtype: &lt;bool&gt;</span>
+<span class="sd">            :exceptions: None.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="nb">all</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_dns_resolver</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dns_resolver</span><span class="o">.</span><span class="n">is_initialized</span><span class="p">()])</span></div>
+</div>
+
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">dns_explorer https://github.com/vroncevic/dns_explorer/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">dns_explorer.application.service</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2026, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

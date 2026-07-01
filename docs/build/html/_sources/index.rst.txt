@@ -89,21 +89,79 @@ Tool structure
 .. code-block:: bash
 
     dns_explorer/
-          ├── conf/
-          │   ├── dns_explorer.cfg
-          │   ├── dns_explorer.logo
-          │   ├── dns_explorer_util.cfg
-          │   └── subdomains.yaml
-          ├── __init__.py
-          ├── log/
-          │   └── dns_explorer.log
-          ├── pro/
-          │   └── __init__.py
-          ├── py.typed
-          └── run/
-              └── dns_explorer_run.py
-    
-    5 directories, 9 files
+         ├── application/
+         │   ├── __init__.py
+         │   └── service.py
+         ├── dns_explorer_bundle.py
+         ├── domain/
+         │   ├── __init__.py
+         │   ├── models.py
+         │   └── ports/
+         │       ├── idns_resolver.py
+         │       ├── __init__.py
+         │       └── iservice.py
+         ├── engine.py
+         ├── infrastructure/
+         │   ├── cli.py
+         │   ├── cli_bundle.py
+         │   ├── config/
+         │   │   ├── dns_explorer.cfg
+         │   │   └── dns_explorer.logo
+         │   ├── dns_resolver.py
+         │   ├── explore_command.py
+         │   ├── icli.py
+         │   ├── icli_command.py
+         │   ├── __init__.py
+         │   ├── records_command.py
+         │   ├── resolve_command.py
+         │   └── reverse_command.py
+         └── __init__.py
+
+     6 directories, 22 files
+
+Usage
+------
+
+Install package
+
+.. code-block:: bash
+
+    pip3 install armpicom
+
+Prepare main entry point by downloading `main.py` or create your own.
+
+.. code-block:: bash
+
+    wget -O main.py https://raw.githubusercontent.com/vroncevic/armpicom/main/main.py
+
+Running tool for DNS exploring
+
+.. code-block:: bash
+
+    # Use case 1: Standard domain scan (no cluster variations, non-verbose)
+    echo "=== Running Use Case 1: Standard scan for google.com ==="
+    python3 main.py explore --domain google.com
+
+    # Use case 2: Scan with cluster variations (size 1)
+    echo "=== Running Use Case 2: Scan for google.com with cluster size 1 ==="
+    python3 main.py explore --domain google.com --cluster 1
+
+    # Use case 3: Scan with cluster size 2 and verbose logging enabled
+    echo "=== Running Use Case 3: Verbose scan for google.com with cluster size 2 ==="
+    python3 main.py explore --domain google.com --cluster 2 --verbose True
+
+    # Use case 4: Query domain DNS records (A, AAAA, MX, NS, TXT, SOA)
+    echo "=== Running Use Case 4: DNS Records query for google.com ==="
+    python3 main.py records --domain google.com
+
+    # Use case 5: Resolve forward IP and reverse hostnames for a single domain name
+    echo "=== Running Use Case 5: Resolve single domain google.com ==="
+    python3 main.py resolve --domain google.com --verbose True
+
+    # Use case 6: Query reverse DNS hostnames for an IP address
+    echo "=== Running Use Case 6: Query reverse DNS for IP 8.8.8.8 ==="
+    python3 main.py reverse --ip 8.8.8.8
+
 
 Copyright and licence
 -----------------------
