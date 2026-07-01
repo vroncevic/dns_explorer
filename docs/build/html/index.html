@@ -54,13 +54,21 @@ other information that should be provided before the tool is installed.</p>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">dns_explorer</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="dns_explorer.html">dns_explorer package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="dns_explorer.html#subpackages">Subpackages</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="dns_explorer.pro.html">dns_explorer.pro package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dns_explorer.application.html">dns_explorer.application package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dns_explorer.domain.html">dns_explorer.domain package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dns_explorer.infrastructure.html">dns_explorer.infrastructure package</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="dns_explorer.html#module-dns_explorer">Module contents</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="dns_explorer.html#dns_explorer.DNSExplorer"><code class="docutils literal notranslate"><span class="pre">DNSExplorer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dns_explorer.html#submodules">Submodules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="dns_explorer.dns_explorer_bundle.html">dns_explorer.dns_explorer_bundle module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dns_explorer.engine.html">dns_explorer.engine module</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="dns_explorer.html#module-dns_explorer">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="main.html#main.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -108,21 +116,72 @@ pip3<span class="w"> </span>install<span class="w"> </span>dns_explorer
 <p><strong>dns_explorer</strong> is based on OOP.</p>
 <p>Tool structure</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dns_explorer/
-<span class="w">      </span>├──<span class="w"> </span>conf/
-<span class="w">      </span>│<span class="w">   </span>├──<span class="w"> </span>dns_explorer.cfg
-<span class="w">      </span>│<span class="w">   </span>├──<span class="w"> </span>dns_explorer.logo
-<span class="w">      </span>│<span class="w">   </span>├──<span class="w"> </span>dns_explorer_util.cfg
-<span class="w">      </span>│<span class="w">   </span>└──<span class="w"> </span>subdomains.yaml
-<span class="w">      </span>├──<span class="w"> </span>__init__.py
-<span class="w">      </span>├──<span class="w"> </span>log/
-<span class="w">      </span>│<span class="w">   </span>└──<span class="w"> </span>dns_explorer.log
-<span class="w">      </span>├──<span class="w"> </span>pro/
-<span class="w">      </span>│<span class="w">   </span>└──<span class="w"> </span>__init__.py
-<span class="w">      </span>├──<span class="w"> </span>py.typed
-<span class="w">      </span>└──<span class="w"> </span>run/
-<span class="w">          </span>└──<span class="w"> </span>dns_explorer_run.py
+<span class="w">     </span>├──<span class="w"> </span>application/
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>__init__.py
+<span class="w">     </span>│<span class="w">   </span>└──<span class="w"> </span>service.py
+<span class="w">     </span>├──<span class="w"> </span>dns_explorer_bundle.py
+<span class="w">     </span>├──<span class="w"> </span>domain/
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>__init__.py
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>models.py
+<span class="w">     </span>│<span class="w">   </span>└──<span class="w"> </span>ports/
+<span class="w">     </span>│<span class="w">       </span>├──<span class="w"> </span>idns_resolver.py
+<span class="w">     </span>│<span class="w">       </span>├──<span class="w"> </span>__init__.py
+<span class="w">     </span>│<span class="w">       </span>└──<span class="w"> </span>iservice.py
+<span class="w">     </span>├──<span class="w"> </span>engine.py
+<span class="w">     </span>├──<span class="w"> </span>infrastructure/
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>cli.py
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>cli_bundle.py
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>config/
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>dns_explorer.cfg
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>dns_explorer.logo
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>dns_resolver.py
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>explore_command.py
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>icli.py
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>icli_command.py
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>__init__.py
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>records_command.py
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>resolve_command.py
+<span class="w">     </span>│<span class="w">   </span>└──<span class="w"> </span>reverse_command.py
+<span class="w">     </span>└──<span class="w"> </span>__init__.py
 
-<span class="m">5</span><span class="w"> </span>directories,<span class="w"> </span><span class="m">9</span><span class="w"> </span>files
+<span class="w"> </span><span class="m">6</span><span class="w"> </span>directories,<span class="w"> </span><span class="m">22</span><span class="w"> </span>files
+</pre></div>
+</div>
+</section>
+<section id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h1>
+<p>Install package</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>armpicom
+</pre></div>
+</div>
+<p>Prepare main entry point by downloading <cite>main.py</cite> or create your own.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>-O<span class="w"> </span>main.py<span class="w"> </span>https://raw.githubusercontent.com/vroncevic/armpicom/main/main.py
+</pre></div>
+</div>
+<p>Running tool for DNS exploring</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use case 1: Standard domain scan (no cluster variations, non-verbose)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Running Use Case 1: Standard scan for google.com ===&quot;</span>
+python3<span class="w"> </span>main.py<span class="w"> </span>explore<span class="w"> </span>--domain<span class="w"> </span>google.com
+
+<span class="c1"># Use case 2: Scan with cluster variations (size 1)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Running Use Case 2: Scan for google.com with cluster size 1 ===&quot;</span>
+python3<span class="w"> </span>main.py<span class="w"> </span>explore<span class="w"> </span>--domain<span class="w"> </span>google.com<span class="w"> </span>--cluster<span class="w"> </span><span class="m">1</span>
+
+<span class="c1"># Use case 3: Scan with cluster size 2 and verbose logging enabled</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Running Use Case 3: Verbose scan for google.com with cluster size 2 ===&quot;</span>
+python3<span class="w"> </span>main.py<span class="w"> </span>explore<span class="w"> </span>--domain<span class="w"> </span>google.com<span class="w"> </span>--cluster<span class="w"> </span><span class="m">2</span><span class="w"> </span>--verbose<span class="w"> </span>True
+
+<span class="c1"># Use case 4: Query domain DNS records (A, AAAA, MX, NS, TXT, SOA)</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Running Use Case 4: DNS Records query for google.com ===&quot;</span>
+python3<span class="w"> </span>main.py<span class="w"> </span>records<span class="w"> </span>--domain<span class="w"> </span>google.com
+
+<span class="c1"># Use case 5: Resolve forward IP and reverse hostnames for a single domain name</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Running Use Case 5: Resolve single domain google.com ===&quot;</span>
+python3<span class="w"> </span>main.py<span class="w"> </span>resolve<span class="w"> </span>--domain<span class="w"> </span>google.com<span class="w"> </span>--verbose<span class="w"> </span>True
+
+<span class="c1"># Use case 6: Query reverse DNS hostnames for an IP address</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;=== Running Use Case 6: Query reverse DNS for IP 8.8.8.8 ===&quot;</span>
+python3<span class="w"> </span>main.py<span class="w"> </span>reverse<span class="w"> </span>--ip<span class="w"> </span><span class="m">8</span>.8.8.8
 </pre></div>
 </div>
 </section>
@@ -160,6 +219,7 @@ at your option, any later version of Python 3 you may have available.</p>
 <li><a class="reference internal" href="#installation">Installation</a></li>
 <li><a class="reference internal" href="#dependencies">Dependencies</a></li>
 <li><a class="reference internal" href="#tool-structure">Tool structure</a></li>
+<li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#copyright-and-licence">Copyright and licence</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>

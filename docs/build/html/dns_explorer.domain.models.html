@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>dns_explorer.domain.models module &#8212; dns_explorer https://github.com/vroncevic/dns_explorer/releases documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=514cf933" />
+    
+    <script src="_static/documentation_options.js?v=8a5c6298"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dns_explorer.infrastructure package" href="dns_explorer.infrastructure.html" />
+    <link rel="prev" title="dns_explorer.domain.ports.iservice module" href="dns_explorer.domain.ports.iservice.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="dns_explorer.infrastructure.html" title="dns_explorer.infrastructure package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="dns_explorer.domain.ports.iservice.html" title="dns_explorer.domain.ports.iservice module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">dns_explorer https://github.com/vroncevic/dns_explorer/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >dns_explorer</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="dns_explorer.html" >dns_explorer package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="dns_explorer.domain.html" accesskey="U">dns_explorer.domain package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">dns_explorer.domain.models module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-dns_explorer.domain.models">
+<span id="dns-explorer-domain-models-module"></span><h1>dns_explorer.domain.models module<a class="headerlink" href="#module-dns_explorer.domain.models" title="Link to this heading">¶</a></h1>
+<dl class="simple">
+<dt>Module</dt><dd><p>models.py</p>
+</dd>
+<dt>Copyright</dt><dd><p>Copyright (C) 2026 Vladimir Roncevic &lt;<a class="reference external" href="mailto:elektron&#46;ronca&#37;&#52;&#48;gmail&#46;com">elektron<span>&#46;</span>ronca<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
+dns_explorer is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+dns_explorer is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
+You should have received a copy of the GNU General Public License along
+with this program. If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+</dd>
+<dt>Info</dt><dd><p>Defines domain models representing tool parameters and results.</p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="dns_explorer.domain.models.DNSRecord">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dns_explorer.domain.models.</span></span><span class="sig-name descname"><span class="pre">DNSRecord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dns_explorer/domain/models.html#DNSRecord"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dns_explorer.domain.models.DNSRecord" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Domain model representing a DNS record.</p>
+<p>It defines:</p>
+<blockquote>
+<div><dl class="field-list">
+<dt class="field-odd">attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><div class="line-block">
+<div class="line">record_type - Type of the DNS record (A, MX, TXT, etc.).</div>
+<div class="line">value - String representation of the record value.</div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dns_explorer.domain.models.DNSRecord.record_type">
+<span class="sig-name descname"><span class="pre">record_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#dns_explorer.domain.models.DNSRecord.record_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dns_explorer.domain.models.DNSRecord.value">
+<span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#dns_explorer.domain.models.DNSRecord.value" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="dns_explorer.domain.models.ResolvedDomain">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dns_explorer.domain.models.</span></span><span class="sig-name descname"><span class="pre">ResolvedDomain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dns_explorer/domain/models.html#ResolvedDomain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dns_explorer.domain.models.ResolvedDomain" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Domain model representing a resolved domain, its IP, and reverse hostnames.</p>
+<p>It defines:</p>
+<blockquote>
+<div><dl class="field-list">
+<dt class="field-odd">attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><div class="line-block">
+<div class="line">domain - Resolved domain name.</div>
+<div class="line">ip - IP address of the domain.</div>
+<div class="line">reverse - List of reverse DNS hostnames.</div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dns_explorer.domain.models.ResolvedDomain.domain">
+<span class="sig-name descname"><span class="pre">domain</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#dns_explorer.domain.models.ResolvedDomain.domain" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dns_explorer.domain.models.ResolvedDomain.ip">
+<span class="sig-name descname"><span class="pre">ip</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#dns_explorer.domain.models.ResolvedDomain.ip" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dns_explorer.domain.models.ResolvedDomain.reverse">
+<span class="sig-name descname"><span class="pre">reverse</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#dns_explorer.domain.models.ResolvedDomain.reverse" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">dns_explorer.domain.models module</a><ul>
+<li><a class="reference internal" href="#dns_explorer.domain.models.DNSRecord"><code class="docutils literal notranslate"><span class="pre">DNSRecord</span></code></a><ul>
+<li><a class="reference internal" href="#dns_explorer.domain.models.DNSRecord.record_type"><code class="docutils literal notranslate"><span class="pre">DNSRecord.record_type</span></code></a></li>
+<li><a class="reference internal" href="#dns_explorer.domain.models.DNSRecord.value"><code class="docutils literal notranslate"><span class="pre">DNSRecord.value</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dns_explorer.domain.models.ResolvedDomain"><code class="docutils literal notranslate"><span class="pre">ResolvedDomain</span></code></a><ul>
+<li><a class="reference internal" href="#dns_explorer.domain.models.ResolvedDomain.domain"><code class="docutils literal notranslate"><span class="pre">ResolvedDomain.domain</span></code></a></li>
+<li><a class="reference internal" href="#dns_explorer.domain.models.ResolvedDomain.ip"><code class="docutils literal notranslate"><span class="pre">ResolvedDomain.ip</span></code></a></li>
+<li><a class="reference internal" href="#dns_explorer.domain.models.ResolvedDomain.reverse"><code class="docutils literal notranslate"><span class="pre">ResolvedDomain.reverse</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="dns_explorer.domain.ports.iservice.html"
+                          title="previous chapter">dns_explorer.domain.ports.iservice module</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="dns_explorer.infrastructure.html"
+                          title="next chapter">dns_explorer.infrastructure package</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/dns_explorer.domain.models.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="dns_explorer.infrastructure.html" title="dns_explorer.infrastructure package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="dns_explorer.domain.ports.iservice.html" title="dns_explorer.domain.ports.iservice module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">dns_explorer https://github.com/vroncevic/dns_explorer/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >dns_explorer</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="dns_explorer.html" >dns_explorer package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="dns_explorer.domain.html" >dns_explorer.domain package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">dns_explorer.domain.models module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2026, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

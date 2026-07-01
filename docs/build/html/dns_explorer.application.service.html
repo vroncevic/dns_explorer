@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>dns_explorer.application.service module &#8212; dns_explorer https://github.com/vroncevic/dns_explorer/releases documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=514cf933" />
+    
+    <script src="_static/documentation_options.js?v=8a5c6298"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="dns_explorer.domain package" href="dns_explorer.domain.html" />
+    <link rel="prev" title="dns_explorer.application package" href="dns_explorer.application.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="dns_explorer.domain.html" title="dns_explorer.domain package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="dns_explorer.application.html" title="dns_explorer.application package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">dns_explorer https://github.com/vroncevic/dns_explorer/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >dns_explorer</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="dns_explorer.html" >dns_explorer package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="dns_explorer.application.html" accesskey="U">dns_explorer.application package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">dns_explorer.application.service module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-dns_explorer.application.service">
+<span id="dns-explorer-application-service-module"></span><h1>dns_explorer.application.service module<a class="headerlink" href="#module-dns_explorer.application.service" title="Link to this heading">¶</a></h1>
+<dl class="simple">
+<dt>Module</dt><dd><p>service.py</p>
+</dd>
+<dt>Copyright</dt><dd><p>Copyright (C) 2026 Vladimir Roncevic &lt;<a class="reference external" href="mailto:elektron&#46;ronca&#37;&#52;&#48;gmail&#46;com">elektron<span>&#46;</span>ronca<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
+dns_explorer is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+dns_explorer is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
+You should have received a copy of the GNU General Public License along
+with this program. If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+</dd>
+<dt>Info</dt><dd><p>Service for orchestrating the tool execution process.</p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="dns_explorer.application.service.Service">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dns_explorer.application.service.</span></span><span class="sig-name descname"><span class="pre">Service</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dns_resolver</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dns_explorer.domain.ports.idns_resolver.html#dns_explorer.domain.ports.idns_resolver.IDNSResolver" title="dns_explorer.domain.ports.idns_resolver.IDNSResolver"><span class="pre">IDNSResolver</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dns_explorer/application/service.html#Service"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dns_explorer.application.service.Service" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dns_explorer.domain.ports.iservice.html#dns_explorer.domain.ports.iservice.IService" title="dns_explorer.domain.ports.iservice.IService"><code class="xref py py-class docutils literal notranslate"><span class="pre">IService</span></code></a></p>
+<p>Service for orchestrating the tool execution process.</p>
+<p>It defines:</p>
+<blockquote>
+<div><dl class="field-list">
+<dt class="field-odd">attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><div class="line-block">
+<div class="line">_dns_resolver - Adapter for DNS resolution operations.</div>
+<div class="line">_SUBDOMAINS - List of _SUBDOMAINS to explore.</div>
+</div>
+</dd>
+<dt class="field-even">methods<span class="colon">:</span></dt>
+<dd class="field-even"><div class="line-block">
+<div class="line">__init__ - Initializes the Service.</div>
+<div class="line">explore - Explores DNS _SUBDOMAINS.</div>
+<div class="line">check_dns - Executes dns request and reverse DNS lookup for a single domain.</div>
+<div class="line">get_records - Queries various DNS records for a domain.</div>
+<div class="line">reverse_resolve - Performs reverse DNS lookup on an IP address.</div>
+<div class="line">is_initialized - Checks if the service and its adapters are initialized.</div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dns_explorer.application.service.Service._SUBDOMAINS">
+<span class="sig-name descname"><span class="pre">_SUBDOMAINS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['www',</span> <span class="pre">'mail',</span> <span class="pre">'remote',</span> <span class="pre">'blog',</span> <span class="pre">'webmail',</span> <span class="pre">'server',</span> <span class="pre">'ns',</span> <span class="pre">'smtp',</span> <span class="pre">'pop',</span> <span class="pre">'imap',</span> <span class="pre">'admin',</span> <span class="pre">'secure',</span> <span class="pre">'vpn',</span> <span class="pre">'dns',</span> <span class="pre">'ftp',</span> <span class="pre">'test',</span> <span class="pre">'portal',</span> <span class="pre">'host',</span> <span class="pre">'support',</span> <span class="pre">'dev',</span> <span class="pre">'web',</span> <span class="pre">'mx',</span> <span class="pre">'email',</span> <span class="pre">'cloud',</span> <span class="pre">'owa',</span> <span class="pre">'cdn',</span> <span class="pre">'api',</span> <span class="pre">'exchange',</span> <span class="pre">'mysql',</span> <span class="pre">'wiki',</span> <span class="pre">'cpanel']</span></em><a class="headerlink" href="#dns_explorer.application.service.Service._SUBDOMAINS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dns_explorer.application.service.Service._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#dns_explorer.application.service.Service._abc_impl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dns_explorer.application.service.Service.check_dns">
+<span class="sig-name descname"><span class="pre">check_dns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="dns_explorer.domain.models.html#dns_explorer.domain.models.ResolvedDomain" title="dns_explorer.domain.models.ResolvedDomain"><span class="pre">ResolvedDomain</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dns_explorer/application/service.html#Service.check_dns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dns_explorer.application.service.Service.check_dns" title="Link to this definition">¶</a></dt>
+<dd><p>Executes dns request and reverse DNS lookup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>domain</strong> (<em>&lt;str&gt;</em>) – Domain name to check.</p></li>
+<li><p><strong>verbose</strong> (<em>&lt;bool&gt;</em>) – Enable/Disable verbose option.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>ResolvedDomain instance or None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;ResolvedDomain | None&gt;</p>
+</dd>
+<dt class="field-even">Exceptions<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dns_explorer.application.service.Service.explore">
+<span class="sig-name descname"><span class="pre">explore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="dns_explorer.domain.models.html#dns_explorer.domain.models.ResolvedDomain" title="dns_explorer.domain.models.ResolvedDomain"><span class="pre">ResolvedDomain</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/dns_explorer/application/service.html#Service.explore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dns_explorer.application.service.Service.explore" title="Link to this definition">¶</a></dt>
+<dd><p>Explores _SUBDOMAINS of a domain and resolves their DNS and reverse DNS.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>domain</strong> (<em>&lt;str&gt;</em>) – Base domain name to explore.</p></li>
+<li><p><strong>cluster</strong> (<em>&lt;int&gt;</em>) – Number of _SUBDOMAINS in cluster to scan.</p></li>
+<li><p><strong>verbose</strong> (<em>&lt;bool&gt;</em>) – Enable/Disable verbose logging.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of resolved domains.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;list[<a class="reference internal" href="dns_explorer.domain.models.html#dns_explorer.domain.models.ResolvedDomain" title="dns_explorer.domain.models.ResolvedDomain">ResolvedDomain</a>]&gt;</p>
+</dd>
+<dt class="field-even">Exceptions<span class="colon">:</span></dt>
+<dd class="field-even"><div class="line-block">
+<div class="line">ValueError: domain must be provided.</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dns_explorer.application.service.Service.get_records">
+<span class="sig-name descname"><span class="pre">get_records</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="dns_explorer.domain.models.html#dns_explorer.domain.models.DNSRecord" title="dns_explorer.domain.models.DNSRecord"><span class="pre">DNSRecord</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/dns_explorer/application/service.html#Service.get_records"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dns_explorer.application.service.Service.get_records" title="Link to this definition">¶</a></dt>
+<dd><p>Queries various DNS records for a domain.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>domain</strong> (<em>&lt;str&gt;</em>) – Domain name.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of DNS records.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;list[<a class="reference internal" href="dns_explorer.domain.models.html#dns_explorer.domain.models.DNSRecord" title="dns_explorer.domain.models.DNSRecord">DNSRecord</a>]&gt;</p>
+</dd>
+<dt class="field-even">Exceptions<span class="colon">:</span></dt>
+<dd class="field-even"><div class="line-block">
+<div class="line">ValueError: domain must be provided.</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dns_explorer.application.service.Service.is_initialized">
+<span class="sig-name descname"><span class="pre">is_initialized</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/dns_explorer/application/service.html#Service.is_initialized"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dns_explorer.application.service.Service.is_initialized" title="Link to this definition">¶</a></dt>
+<dd><p>Checks if the service is initialized.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the service is initialized, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>&lt;bool&gt;</p>
+</dd>
+<dt class="field-odd">Exceptions<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="dns_explorer.application.service.Service.reverse_resolve">
+<span class="sig-name descname"><span class="pre">reverse_resolve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/dns_explorer/application/service.html#Service.reverse_resolve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dns_explorer.application.service.Service.reverse_resolve" title="Link to this definition">¶</a></dt>
+<dd><p>Performs reverse DNS lookup on an IP address.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ip</strong> (<em>&lt;str&gt;</em>) – IP address.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of resolved hostnames.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>&lt;list[str]&gt;</p>
+</dd>
+<dt class="field-even">Exceptions<span class="colon">:</span></dt>
+<dd class="field-even"><div class="line-block">
+<div class="line">ValueError: ip must be provided.</div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">dns_explorer.application.service module</a><ul>
+<li><a class="reference internal" href="#dns_explorer.application.service.Service"><code class="docutils literal notranslate"><span class="pre">Service</span></code></a><ul>
+<li><a class="reference internal" href="#dns_explorer.application.service.Service._SUBDOMAINS"><code class="docutils literal notranslate"><span class="pre">Service._SUBDOMAINS</span></code></a></li>
+<li><a class="reference internal" href="#dns_explorer.application.service.Service._abc_impl"><code class="docutils literal notranslate"><span class="pre">Service._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#dns_explorer.application.service.Service.check_dns"><code class="docutils literal notranslate"><span class="pre">Service.check_dns()</span></code></a></li>
+<li><a class="reference internal" href="#dns_explorer.application.service.Service.explore"><code class="docutils literal notranslate"><span class="pre">Service.explore()</span></code></a></li>
+<li><a class="reference internal" href="#dns_explorer.application.service.Service.get_records"><code class="docutils literal notranslate"><span class="pre">Service.get_records()</span></code></a></li>
+<li><a class="reference internal" href="#dns_explorer.application.service.Service.is_initialized"><code class="docutils literal notranslate"><span class="pre">Service.is_initialized()</span></code></a></li>
+<li><a class="reference internal" href="#dns_explorer.application.service.Service.reverse_resolve"><code class="docutils literal notranslate"><span class="pre">Service.reverse_resolve()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="dns_explorer.application.html"
+                          title="previous chapter">dns_explorer.application package</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="dns_explorer.domain.html"
+                          title="next chapter">dns_explorer.domain package</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/dns_explorer.application.service.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="dns_explorer.domain.html" title="dns_explorer.domain package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="dns_explorer.application.html" title="dns_explorer.application package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">dns_explorer https://github.com/vroncevic/dns_explorer/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >dns_explorer</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="dns_explorer.html" >dns_explorer package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="dns_explorer.application.html" >dns_explorer.application package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">dns_explorer.application.service module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2026, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>
