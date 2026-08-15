@@ -1,4 +1,11 @@
-#!/usr/bin/env bash
+#!/bin/bash
+#
+# @brief   dns_explorer
+# @version 1.0.6
+# @date    Sat Aug 07 07:35:10 2026
+# @company None, free software to use 2026
+# @author  Vladimir Roncevic <elektron.ronca@gmail.com>
+#
 
 # Use case 1: Standard domain scan (no cluster variations, non-verbose)
 python3 main.py explore --domain google.com

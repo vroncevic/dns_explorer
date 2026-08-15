@@ -16,23 +16,22 @@ other information that should be provided before the modules are installed.
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
 
-- [Installation](#installation)
+- [🚀 Installation](#-installation)
     - [Install using pip](#install-using-pip)
     - [Install using build](#install-using-build)
     - [Install using py setup](#install-using-py-setup)
     - [Install using docker](#install-using-docker)
-- [Dependencies](#dependencies)
-- [Tool structure](#tool-structure)
-- [Code coverage](#code-coverage)
-- [Usage](#usage)
-- [Docs](#docs)
-- [Contributing](#contributing)
-- [Copyright and licence](#copyright-and-licence)
+- [📦 Dependencies](#-dependencies)
+- [📁 Tool structure](#-tool-structure)
+- [📊 Code coverage](#-code-coverage)
+- [🛠 Usage](#-usage)
+- [📚 Docs](#-docs)
+- [👥 Contributing](#-contributing)
+- [📄 Copyright and licence](#-copyright-and-licence)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-### Installation
-
+### 🚀 Installation
 Used next development environment
 
 ![debian linux os](https://raw.githubusercontent.com/vroncevic/dns_explorer/dev/docs/debtux.png)
@@ -98,15 +97,13 @@ python3 setup.py install_egg_info
 
 You can use Dockerfile to create image/container.
 
-### Dependencies
-
+### 📦 Dependencies
 **dns_explorer** requires next modules and libraries
 
 * [ats-utilities - Python App/Tool/Script Utilities](https://pypi.org/project/ats-utilities/)
 * [dnspython - DNS toolkit for Python](https://pypi.org/project/dnspython/)
 
-### Tool structure
-
+### 📁 Tool structure
 **dns_explorer** is based on OOP.
 
 Tool structure
@@ -116,71 +113,126 @@ Tool structure
 
 ```bash
     dns_explorer/
-         ├── application/
+         ├── core/
          │   ├── __init__.py
-         │   └── service.py
-         ├── dns_explorer_bundle.py
-         ├── domain/
-         │   ├── __init__.py
-         │   ├── models.py
-         │   └── ports/
+         │   ├── model/
+         │   │   ├── __init__.py
+         │   │   └── models.py
+         │   └── service/
+         │       ├── engine.py
          │       ├── idns_resolver.py
          │       ├── __init__.py
          │       └── iservice.py
          ├── engine.py
          ├── infrastructure/
-         │   ├── cli.py
-         │   ├── cli_bundle.py
+         │   ├── cli/
+         │   │   ├── engine.py
+         │   │   ├── icli.py
+         │   │   ├── __init__.py
+         │   │   └── setup/
+         │   │       ├── bundle.py
+         │   │       ├── dep_validator.py
+         │   │       ├── dependencies.py
+         │   │       ├── factory.py
+         │   │       ├── __init__.py
+         │   │       ├── keys.py
+         │   │       ├── opt_validator.py
+         │   │       ├── options.py
+         │   │       ├── registry.py
+         │   │       └── validator.py
+         │   ├── command/
+         │   │   ├── command.py
+         │   │   ├── explore_command_definition.py
+         │   │   ├── explore_command_executor.py
+         │   │   ├── icommand_definition.py
+         │   │   ├── icommand_executor.py
+         │   │   ├── __init__.py
+         │   │   ├── records_command_definition.py
+         │   │   ├── records_command_executor.py
+         │   │   ├── resolve_command_definition.py
+         │   │   ├── resolve_command_executor.py
+         │   │   ├── reverse_command_definition.py
+         │   │   └── reverse_command_executor.py
          │   ├── config/
          │   │   ├── dns_explorer.cfg
          │   │   └── dns_explorer.logo
          │   ├── dns_resolver.py
-         │   ├── explore_command.py
-         │   ├── icli.py
-         │   ├── icli_command.py
-         │   ├── __init__.py
-         │   ├── records_command.py
-         │   ├── resolve_command.py
-         │   └── reverse_command.py
-         └── __init__.py
+         │   └── __init__.py
+         ├── __init__.py
+         ├── py.typed
+         └── setup/
+             ├── bundle.py
+             ├── dep_validator.py
+             ├── dependencies.py
+             ├── factory.py
+             ├── __init__.py
+             ├── keys.py
+             ├── opt_validator.py
+             ├── options.py
+             ├── registry.py
+             └── validator.py
 
-     6 directories, 22 files
+     10 directories, 49 files
 ```
 </details>
 
-### Code coverage
-
+### 📊 Code coverage
 <details>
 <summary><b>Click to expand code coverage</b></summary>
 
 | Name | Stmts | Miss | Cover |
 |------|-------|------|-------|
 | `dns_explorer/__init__.py` | 8 | 0 | 100%|
-| `dns_explorer/application/__init__.py` | 8 | 0 | 100%|
-| `dns_explorer/application/service.py` | 69 | 0 | 100%|
-| `dns_explorer/dns_explorer_bundle.py` | 37 | 0 | 100%|
-| `dns_explorer/domain/__init__.py` | 8 | 0 | 100%|
-| `dns_explorer/domain/models.py` | 18 | 0 | 100%|
-| `dns_explorer/domain/ports/__init__.py` | 8 | 0 | 100%|
-| `dns_explorer/domain/ports/idns_resolver.py` | 10 | 0 | 100%|
-| `dns_explorer/domain/ports/iservice.py` | 11 | 0 | 100%|
-| `dns_explorer/engine.py` | 62 | 0 | 100%|
+| `dns_explorer/core/__init__.py` | 9 | 0 | 100%|
+| `dns_explorer/core/model/__init__.py` | 9 | 0 | 100%|
+| `dns_explorer/core/model/models.py` | 19 | 0 | 100%|
+| `dns_explorer/core/service/__init__.py` | 9 | 0 | 100%|
+| `dns_explorer/core/service/engine.py` | 68 | 12 | 82%|
+| `dns_explorer/core/service/idns_resolver.py` | 17 | 0 | 100%|
+| `dns_explorer/core/service/iservice.py` | 18 | 0 | 100%|
+| `dns_explorer/engine.py` | 57 | 0 | 100%|
 | `dns_explorer/infrastructure/__init__.py` | 8 | 0 | 100%|
-| `dns_explorer/infrastructure/cli.py` | 36 | 0 | 100%|
-| `dns_explorer/infrastructure/cli_bundle.py` | 33 | 0 | 100%|
-| `dns_explorer/infrastructure/dns_resolver.py` | 66 | 0 | 100%|
-| `dns_explorer/infrastructure/explore_command.py` | 58 | 0 | 100%|
-| `dns_explorer/infrastructure/icli.py` | 11 | 0 | 100%|
-| `dns_explorer/infrastructure/icli_command.py` | 14 | 0 | 100%|
-| `dns_explorer/infrastructure/records_command.py` | 55 | 0 | 100%|
-| `dns_explorer/infrastructure/resolve_command.py` | 60 | 0 | 100%|
-| `dns_explorer/infrastructure/reverse_command.py` | 54 | 0 | 100%|
-| **Total** | 634 | 0 | 100% |
+| `dns_explorer/infrastructure/cli/__init__.py` | 9 | 0 | 100%|
+| `dns_explorer/infrastructure/cli/engine.py` | 43 | 0 | 100%|
+| `dns_explorer/infrastructure/cli/icli.py` | 15 | 0 | 100%|
+| `dns_explorer/infrastructure/cli/setup/__init__.py` | 9 | 0 | 100%|
+| `dns_explorer/infrastructure/cli/setup/bundle.py` | 22 | 0 | 100%|
+| `dns_explorer/infrastructure/cli/setup/dep_validator.py` | 36 | 0 | 100%|
+| `dns_explorer/infrastructure/cli/setup/dependencies.py` | 18 | 0 | 100%|
+| `dns_explorer/infrastructure/cli/setup/factory.py` | 46 | 0 | 100%|
+| `dns_explorer/infrastructure/cli/setup/keys.py` | 28 | 0 | 100%|
+| `dns_explorer/infrastructure/cli/setup/opt_validator.py` | 34 | 0 | 100%|
+| `dns_explorer/infrastructure/cli/setup/options.py` | 17 | 0 | 100%|
+| `dns_explorer/infrastructure/cli/setup/registry.py` | 26 | 0 | 100%|
+| `dns_explorer/infrastructure/cli/setup/validator.py` | 43 | 0 | 100%|
+| `dns_explorer/infrastructure/command/__init__.py` | 9 | 0 | 100%|
+| `dns_explorer/infrastructure/command/command.py` | 16 | 0 | 100%|
+| `dns_explorer/infrastructure/command/explore_command_definition.py` | 24 | 1 | 96%|
+| `dns_explorer/infrastructure/command/explore_command_executor.py` | 50 | 17 | 66%|
+| `dns_explorer/infrastructure/command/icommand_definition.py` | 14 | 0 | 100%|
+| `dns_explorer/infrastructure/command/icommand_executor.py` | 14 | 0 | 100%|
+| `dns_explorer/infrastructure/command/records_command_definition.py` | 24 | 1 | 96%|
+| `dns_explorer/infrastructure/command/records_command_executor.py` | 47 | 14 | 70%|
+| `dns_explorer/infrastructure/command/resolve_command_definition.py` | 24 | 1 | 96%|
+| `dns_explorer/infrastructure/command/resolve_command_executor.py` | 51 | 19 | 63%|
+| `dns_explorer/infrastructure/command/reverse_command_definition.py` | 24 | 1 | 96%|
+| `dns_explorer/infrastructure/command/reverse_command_executor.py` | 46 | 14 | 70%|
+| `dns_explorer/infrastructure/dns_resolver.py` | 66 | 15 | 77%|
+| `dns_explorer/setup/__init__.py` | 9 | 0 | 100%|
+| `dns_explorer/setup/bundle.py` | 23 | 0 | 100%|
+| `dns_explorer/setup/dep_validator.py` | 36 | 0 | 100%|
+| `dns_explorer/setup/dependencies.py` | 19 | 0 | 100%|
+| `dns_explorer/setup/factory.py` | 59 | 0 | 100%|
+| `dns_explorer/setup/keys.py` | 27 | 0 | 100%|
+| `dns_explorer/setup/opt_validator.py` | 34 | 0 | 100%|
+| `dns_explorer/setup/options.py` | 12 | 0 | 100%|
+| `dns_explorer/setup/registry.py` | 32 | 0 | 100%|
+| `dns_explorer/setup/validator.py` | 48 | 0 | 100%|
+| **Total** | 1276 | 95 | 93% |
 
 </details>
 
-### Usage
-
+### 🛠 Usage
 Install package
 
 ```bash
@@ -222,8 +274,7 @@ echo "=== Running Use Case 6: Query reverse DNS for IP 8.8.8.8 ==="
 python3 main.py reverse --ip 8.8.8.8
 ```
 
-### Docs
-
+### 📚 Docs
 [![Documentation Status](https://readthedocs.org/projects/dns_explorer/badge/?version=latest)](https://dns-explorer.readthedocs.io/en/latest/?badge=latest)
 
 More documentation and info at
@@ -231,12 +282,10 @@ More documentation and info at
 * [dns_explorer.readthedocs.io](https://dns-explorer.readthedocs.io)
 * [www.python.org](https://www.python.org/)
 
-### Contributing
-
+### 👥 Contributing
 [Contributing to dns_explorer](CONTRIBUTING.md)
 
-### Copyright and licence
-
+### 📄 Copyright and licence
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 Copyright (C) 2024 - 2026 by [vroncevic.github.io/dns_explorer](https://vroncevic.github.io/dns_explorer)

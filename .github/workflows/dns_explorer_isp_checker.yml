@@ -1,0 +1,29 @@
+name: dns_explorer_isp_checker
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [ dev ]
+    paths:
+      - 'dns_explorer/**/*.py'
+      - 'setup.py'
+  pull_request:
+    branches: [ dev ]
+    paths:
+      - 'dns_explorer/**/*.py'
+      - 'setup.py'
+
+jobs:
+  isp_gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Check Interface Segregation Principle violations
+        run: |
+          python3 gates/gates/isp_checker.py dns_explorer
