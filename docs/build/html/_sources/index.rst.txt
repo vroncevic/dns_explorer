@@ -33,8 +33,8 @@ other information that should be provided before the tool is installed.
    self
    modules
 
-Installation
--------------
+🚀 Installation
+-----------------
 
 |dns_explorer python3 build|
 
@@ -71,16 +71,16 @@ You can use Docker to create image/container, or You can use pip to install
     # pyton3
     pip3 install dns_explorer
 
-Dependencies
--------------
+📦 Dependencies
+-----------------
 
 **dns_explorer** requires next modules and libraries
 
 * `ats-utilities - Python App/Tool/Script Utilities <https://pypi.org/project/ats-utilities/>`_
 * `dnspython - DNS toolkit for Python <https://pypi.org/project/dnspython/>`_
 
-Tool structure
----------------
+📁 Tool structure
+------------------
 
 **dns_explorer** is based on OOP.
 
@@ -89,38 +89,69 @@ Tool structure
 .. code-block:: bash
 
     dns_explorer/
-         ├── application/
-         │   ├── __init__.py
-         │   └── service.py
-         ├── dns_explorer_bundle.py
-         ├── domain/
-         │   ├── __init__.py
-         │   ├── models.py
-         │   └── ports/
-         │       ├── idns_resolver.py
-         │       ├── __init__.py
-         │       └── iservice.py
+         ├── core/
+         │   ├── __init__.py
+         │   ├── model/
+         │   │   ├── __init__.py
+         │   │   └── models.py
+         │   └── service/
+         │       ├── engine.py
+         │       ├── idns_resolver.py
+         │       ├── __init__.py
+         │       └── iservice.py
          ├── engine.py
          ├── infrastructure/
-         │   ├── cli.py
-         │   ├── cli_bundle.py
-         │   ├── config/
-         │   │   ├── dns_explorer.cfg
-         │   │   └── dns_explorer.logo
-         │   ├── dns_resolver.py
-         │   ├── explore_command.py
-         │   ├── icli.py
-         │   ├── icli_command.py
-         │   ├── __init__.py
-         │   ├── records_command.py
-         │   ├── resolve_command.py
-         │   └── reverse_command.py
-         └── __init__.py
+         │   ├── cli/
+         │   │   ├── engine.py
+         │   │   ├── icli.py
+         │   │   ├── __init__.py
+         │   │   └── setup/
+         │   │       ├── bundle.py
+         │   │       ├── dep_validator.py
+         │   │       ├── dependencies.py
+         │   │       ├── factory.py
+         │   │       ├── __init__.py
+         │   │       ├── keys.py
+         │   │       ├── opt_validator.py
+         │   │       ├── options.py
+         │   │       ├── registry.py
+         │   │       └── validator.py
+         │   ├── command/
+         │   │   ├── command.py
+         │   │   ├── explore_command_definition.py
+         │   │   ├── explore_command_executor.py
+         │   │   ├── icommand_definition.py
+         │   │   ├── icommand_executor.py
+         │   │   ├── __init__.py
+         │   │   ├── records_command_definition.py
+         │   │   ├── records_command_executor.py
+         │   │   ├── resolve_command_definition.py
+         │   │   ├── resolve_command_executor.py
+         │   │   ├── reverse_command_definition.py
+         │   │   └── reverse_command_executor.py
+         │   ├── config/
+         │   │   ├── dns_explorer.cfg
+         │   │   └── dns_explorer.logo
+         │   ├── dns_resolver.py
+         │   └── __init__.py
+         ├── __init__.py
+         ├── py.typed
+         └── setup/
+             ├── bundle.py
+             ├── dep_validator.py
+             ├── dependencies.py
+             ├── factory.py
+             ├── __init__.py
+             ├── keys.py
+             ├── opt_validator.py
+             ├── options.py
+             ├── registry.py
+             └── validator.py
 
-     6 directories, 22 files
+     10 directories, 49 files
 
-Usage
-------
+🛠 Usage
+---------
 
 Install package
 
@@ -163,8 +194,8 @@ Running tool for DNS exploring
     python3 main.py reverse --ip 8.8.8.8
 
 
-Copyright and licence
------------------------
+📄 Copyright and licence
+---------------------------
 
 |license: gpl v3| |license: apache 2.0|
 
@@ -193,7 +224,7 @@ Lets help and support PSF.
    :target: https://www.python.org/psf/donations/
 
 Indices and tables
-------------------
+-------------------
 
 * :ref:`genindex`
 * :ref:`modindex`

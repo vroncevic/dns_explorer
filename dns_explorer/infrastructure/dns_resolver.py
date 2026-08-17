@@ -26,14 +26,14 @@ from dns.resolver import resolve, NXDOMAIN, NoAnswer
 from dns.exception import Timeout
 from ats_utilities.exceptions.ats_type_error import ATSTypeError
 from ats_utilities.exceptions.ats_value_error import ATSValueError
-from ats_utilities.factory_class import format_instance_to_string
-from dns_explorer.domain.ports.idns_resolver import IDNSResolver
+from ats_utilities.utils.reflection import to_str
+from dns_explorer.core.service.idns_resolver import IDNSResolver
 
 __author__: str = 'Vladimir Roncevic'
 __copyright__: str = '(C) 2026, https://vroncevic.github.io/dns_explorer'
 __credits__: list[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__: str = 'https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE'
-__version__: str = '1.0.5'
+__version__: str = '1.0.6'
 __maintainer__: str = 'Vladimir Roncevic'
 __email__: str = 'elektron.ronca@gmail.com'
 __status__: str = 'Development'
@@ -165,4 +165,4 @@ class DNSResolver(IDNSResolver):
             :rtype: <str>
             :exceptions: None.
         '''
-        return format_instance_to_string(self)
+        return to_str(self)

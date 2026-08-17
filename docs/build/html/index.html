@@ -54,13 +54,12 @@ other information that should be provided before the tool is installed.</p>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">dns_explorer</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="dns_explorer.html">dns_explorer package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="dns_explorer.html#subpackages">Subpackages</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="dns_explorer.application.html">dns_explorer.application package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="dns_explorer.domain.html">dns_explorer.domain package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dns_explorer.core.html">dns_explorer.core package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="dns_explorer.infrastructure.html">dns_explorer.infrastructure package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dns_explorer.setup.html">dns_explorer.setup package</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="dns_explorer.html#submodules">Submodules</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="dns_explorer.dns_explorer_bundle.html">dns_explorer.dns_explorer_bundle module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="dns_explorer.engine.html">dns_explorer.engine module</a></li>
 </ul>
 </li>
@@ -77,7 +76,7 @@ other information that should be provided before the tool is installed.</p>
 </div>
 </section>
 <section id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h1>
+<h1>🚀 Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h1>
 <p><a class="reference external" href="https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_python3_build.yml"><img alt="dns_explorer python3 build" src="https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_python3_build.yml/badge.svg" /></a></p>
 <p>Navigate to release <a class="reference external" href="https://github.com/vroncevic/dns_explorer/releases">page</a> download and extract release archive.</p>
 <p>To install <strong>dns_explorer</strong> type the following</p>
@@ -104,7 +103,7 @@ pip3<span class="w"> </span>install<span class="w"> </span>dns_explorer
 </div>
 </section>
 <section id="dependencies">
-<h1>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">¶</a></h1>
+<h1>📦 Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">¶</a></h1>
 <p><strong>dns_explorer</strong> requires next modules and libraries</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://pypi.org/project/ats-utilities/">ats-utilities - Python App/Tool/Script Utilities</a></p></li>
@@ -112,44 +111,75 @@ pip3<span class="w"> </span>install<span class="w"> </span>dns_explorer
 </ul>
 </section>
 <section id="tool-structure">
-<h1>Tool structure<a class="headerlink" href="#tool-structure" title="Link to this heading">¶</a></h1>
+<h1>📁 Tool structure<a class="headerlink" href="#tool-structure" title="Link to this heading">¶</a></h1>
 <p><strong>dns_explorer</strong> is based on OOP.</p>
 <p>Tool structure</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dns_explorer/
-<span class="w">     </span>├──<span class="w"> </span>application/
-<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>__init__.py
-<span class="w">     </span>│<span class="w">   </span>└──<span class="w"> </span>service.py
-<span class="w">     </span>├──<span class="w"> </span>dns_explorer_bundle.py
-<span class="w">     </span>├──<span class="w"> </span>domain/
-<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>__init__.py
-<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>models.py
-<span class="w">     </span>│<span class="w">   </span>└──<span class="w"> </span>ports/
-<span class="w">     </span>│<span class="w">       </span>├──<span class="w"> </span>idns_resolver.py
-<span class="w">     </span>│<span class="w">       </span>├──<span class="w"> </span>__init__.py
-<span class="w">     </span>│<span class="w">       </span>└──<span class="w"> </span>iservice.py
+<span class="w">     </span>├──<span class="w"> </span>core/
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>__init__.py
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>model/
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>__init__.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>models.py
+<span class="w">     </span>│<span class="w">   </span>└──<span class="w"> </span>service/
+<span class="w">     </span>│<span class="w">       </span>├──<span class="w"> </span>engine.py
+<span class="w">     </span>│<span class="w">       </span>├──<span class="w"> </span>idns_resolver.py
+<span class="w">     </span>│<span class="w">       </span>├──<span class="w"> </span>__init__.py
+<span class="w">     </span>│<span class="w">       </span>└──<span class="w"> </span>iservice.py
 <span class="w">     </span>├──<span class="w"> </span>engine.py
 <span class="w">     </span>├──<span class="w"> </span>infrastructure/
-<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>cli.py
-<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>cli_bundle.py
-<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>config/
-<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>dns_explorer.cfg
-<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>dns_explorer.logo
-<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>dns_resolver.py
-<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>explore_command.py
-<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>icli.py
-<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>icli_command.py
-<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>__init__.py
-<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>records_command.py
-<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>resolve_command.py
-<span class="w">     </span>│<span class="w">   </span>└──<span class="w"> </span>reverse_command.py
-<span class="w">     </span>└──<span class="w"> </span>__init__.py
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>cli/
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>engine.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>icli.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>__init__.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>setup/
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>bundle.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>dep_validator.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>dependencies.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>factory.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>__init__.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>keys.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>opt_validator.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>options.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>registry.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">       </span>└──<span class="w"> </span>validator.py
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>command/
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>command.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>explore_command_definition.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>explore_command_executor.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>icommand_definition.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>icommand_executor.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>__init__.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>records_command_definition.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>records_command_executor.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>resolve_command_definition.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>resolve_command_executor.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>reverse_command_definition.py
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>reverse_command_executor.py
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>config/
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>dns_explorer.cfg
+<span class="w">     </span>│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>dns_explorer.logo
+<span class="w">     </span>│<span class="w">   </span>├──<span class="w"> </span>dns_resolver.py
+<span class="w">     </span>│<span class="w">   </span>└──<span class="w"> </span>__init__.py
+<span class="w">     </span>├──<span class="w"> </span>__init__.py
+<span class="w">     </span>├──<span class="w"> </span>py.typed
+<span class="w">     </span>└──<span class="w"> </span>setup/
+<span class="w">         </span>├──<span class="w"> </span>bundle.py
+<span class="w">         </span>├──<span class="w"> </span>dep_validator.py
+<span class="w">         </span>├──<span class="w"> </span>dependencies.py
+<span class="w">         </span>├──<span class="w"> </span>factory.py
+<span class="w">         </span>├──<span class="w"> </span>__init__.py
+<span class="w">         </span>├──<span class="w"> </span>keys.py
+<span class="w">         </span>├──<span class="w"> </span>opt_validator.py
+<span class="w">         </span>├──<span class="w"> </span>options.py
+<span class="w">         </span>├──<span class="w"> </span>registry.py
+<span class="w">         </span>└──<span class="w"> </span>validator.py
 
-<span class="w"> </span><span class="m">6</span><span class="w"> </span>directories,<span class="w"> </span><span class="m">22</span><span class="w"> </span>files
+<span class="w"> </span><span class="m">10</span><span class="w"> </span>directories,<span class="w"> </span><span class="m">49</span><span class="w"> </span>files
 </pre></div>
 </div>
 </section>
 <section id="usage">
-<h1>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h1>
+<h1>🛠 Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h1>
 <p>Install package</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>armpicom
 </pre></div>
@@ -186,7 +216,7 @@ python3<span class="w"> </span>main.py<span class="w"> </span>reverse<span class
 </div>
 </section>
 <section id="copyright-and-licence">
-<h1>Copyright and licence<a class="headerlink" href="#copyright-and-licence" title="Link to this heading">¶</a></h1>
+<h1>📄 Copyright and licence<a class="headerlink" href="#copyright-and-licence" title="Link to this heading">¶</a></h1>
 <p><a class="reference external" href="https://www.gnu.org/licenses/gpl-3.0"><img alt="license: gpl v3" src="https://img.shields.io/badge/license-gplv3-blue.svg" /></a> <a class="reference external" href="https://opensource.org/licenses/apache-2.0"><img alt="license: apache 2.0" src="https://img.shields.io/badge/license-apache%202.0-blue.svg" /></a></p>
 <p>Copyright (C) 2024 - 2026 by <a class="reference external" href="https://vroncevic.github.io/dns_explorer">vroncevic.github.io/dns_explorer</a></p>
 <p><strong>dns_explorer</strong> is free software; you can redistribute it and/or modify
@@ -216,11 +246,11 @@ at your option, any later version of Python 3 you may have available.</p>
     <h3><a href="#">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Check explorer</a></li>
-<li><a class="reference internal" href="#installation">Installation</a></li>
-<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
-<li><a class="reference internal" href="#tool-structure">Tool structure</a></li>
-<li><a class="reference internal" href="#usage">Usage</a></li>
-<li><a class="reference internal" href="#copyright-and-licence">Copyright and licence</a></li>
+<li><a class="reference internal" href="#installation">🚀 Installation</a></li>
+<li><a class="reference internal" href="#dependencies">📦 Dependencies</a></li>
+<li><a class="reference internal" href="#tool-structure">📁 Tool structure</a></li>
+<li><a class="reference internal" href="#usage">🛠 Usage</a></li>
+<li><a class="reference internal" href="#copyright-and-licence">📄 Copyright and licence</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 

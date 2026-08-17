@@ -19,27 +19,39 @@ Info
     Main entry point for Task Code Generator CLI.
 '''
 
+from __future__ import annotations
+
+from sys import exit
+
 from dns_explorer.engine import DNSExplorer
+from dns_explorer.setup.factory import DNSExplorerBundleFactory
 
-__author__: str = 'Vladimir Roncevic'
-__copyright__: str = '(C) 2026, https://vroncevic.github.io/dns_explorer'
-__credits__: list[str] = ['Vladimir Roncevic', 'Python Software Foundation']
-__license__: str = 'https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE'
-__version__: str = '1.0.5'
-__maintainer__: str = 'Vladimir Roncevic'
-__email__: str = 'elektron.ronca@gmail.com'
-__status__: str = 'Development'
+__author__ = 'Vladimir Roncevic'
+__copyright__ = '(C) 2026, https://vroncevic.github.io/dns_explorer'
+__credits__ = ['Vladimir Roncevic', 'Python Software Foundation']
+__license__ = 'https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE'
+__version__ = '1.0.6'
+__maintainer__ = 'Vladimir Roncevic'
+__email__ = 'elektron.ronca@gmail.com'
+__status__ = 'Updated'
 
 
-def main() -> None:
+def main() -> bool:
     '''
-        Bootstraps and runs the CLI application with required adapters.
+        Bootstraps and runs the dns_explorer with required adapters.
 
+        :return: True if successful, False otherwise.
         :exceptions: None
     '''
-    dns_explorer = DNSExplorer()
-    dns_explorer.process()
+    dns_explorer = DNSExplorer(DNSExplorerBundleFactory.create_bundle())
+    return dns_explorer.process()
 
 
-if __name__ == "__main__":
-    main()
+if __name__ == '__main__':
+    '''
+        Entry point for dns_explorer execution.
+
+        :exit code: 0 if successful, 1 otherwise.
+        :exceptions: None
+    '''
+    exit(0 if main() else 1)
