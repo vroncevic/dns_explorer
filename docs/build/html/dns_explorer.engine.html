@@ -16,7 +16,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="main module" href="main.html" />
-    <link rel="prev" title="dns_explorer.dns_explorer_bundle module" href="dns_explorer.dns_explorer_bundle.html" /> 
+    <link rel="prev" title="dns_explorer.setup.validator module" href="dns_explorer.setup.validator.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -31,7 +31,7 @@
           <a href="main.html" title="main module"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="dns_explorer.dns_explorer_bundle.html" title="dns_explorer.dns_explorer_bundle module"
+          <a href="dns_explorer.setup.validator.html" title="dns_explorer.setup.validator module"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">dns_explorer https://github.com/vroncevic/dns_explorer/releases documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >dns_explorer</a> &#187;</li>
@@ -67,7 +67,7 @@ with this program. If not, see &lt;<a class="reference external" href="http://ww
 </dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="dns_explorer.engine.DNSExplorer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dns_explorer.engine.</span></span><span class="sig-name descname"><span class="pre">DNSExplorer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">component_bundle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dns_explorer.dns_explorer_bundle.html#dns_explorer.dns_explorer_bundle.DNSExplorerBundle" title="dns_explorer.dns_explorer_bundle.DNSExplorerBundle"><span class="pre">DNSExplorerBundle</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dns_explorer/engine.html#DNSExplorer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dns_explorer.engine.DNSExplorer" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dns_explorer.engine.</span></span><span class="sig-name descname"><span class="pre">DNSExplorer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bundle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="dns_explorer.setup.bundle.html#dns_explorer.setup.bundle.DNSExplorerBundle" title="dns_explorer.setup.bundle.DNSExplorerBundle"><span class="pre">DNSExplorerBundle</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dns_explorer/engine.html#DNSExplorer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dns_explorer.engine.DNSExplorer" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Base</span></code></p>
 <p>Engine orchestrating the initialization and execution of DNSExplorer.</p>
 <p>It defines:</p>
@@ -75,33 +75,45 @@ with this program. If not, see &lt;<a class="reference external" href="http://ww
 <div><dl class="field-list">
 <dt class="field-odd">attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><div class="line-block">
-<div class="line">_info_file - Path to the info file.</div>
-<div class="line">_cli - Adapter for command line user interface.</div>
+<div class="line">_is_initialized - Flag indicating whether the engine is initialized.</div>
+<div class="line">_logger - The logger for logging messages.</div>
+<div class="line">_cli - The adapter for the command line interface.</div>
 </div>
 </dd>
 <dt class="field-even">methods<span class="colon">:</span></dt>
 <dd class="field-even"><div class="line-block">
-<div class="line">__init__ - Initializes the DNSExplorer engine with adapters and services.</div>
-<div class="line">run - Starts the dns_explorer.</div>
+<div class="line">__init__ - Initializes the engine with the bundle.</div>
+<div class="line">process - Runs the command adapter.</div>
 </div>
 </dd>
 </dl>
 </div></blockquote>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="dns_explorer.engine.DNSExplorer._abc_impl">
-<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#dns_explorer.engine.DNSExplorer._abc_impl" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="dns_explorer.engine.DNSExplorer._cli">
+<span class="sig-name descname"><span class="pre">_cli</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="dns_explorer.infrastructure.cli.icli.html#dns_explorer.infrastructure.cli.icli.ICLI" title="dns_explorer.infrastructure.cli.icli.ICLI"><span class="pre">ICLI</span></a></em><a class="headerlink" href="#dns_explorer.engine.DNSExplorer._cli" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="dns_explorer.engine.DNSExplorer._info_file">
-<span class="sig-name descname"><span class="pre">_info_file</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'infrastructure/config/dns_explorer.cfg'</span></em><a class="headerlink" href="#dns_explorer.engine.DNSExplorer._info_file" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="dns_explorer.engine.DNSExplorer._is_initialized">
+<span class="sig-name descname"><span class="pre">_is_initialized</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#dns_explorer.engine.DNSExplorer._is_initialized" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dns_explorer.engine.DNSExplorer._logger">
+<span class="sig-name descname"><span class="pre">_logger</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ILogger</span></em><a class="headerlink" href="#dns_explorer.engine.DNSExplorer._logger" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="dns_explorer.engine.DNSExplorer.process">
-<span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dns_explorer/engine.html#DNSExplorer.process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dns_explorer.engine.DNSExplorer.process" title="Link to this definition">¶</a></dt>
-<dd><p>Runs the dns_explorer.</p>
+<span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/dns_explorer/engine.html#DNSExplorer.process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dns_explorer.engine.DNSExplorer.process" title="Link to this definition">¶</a></dt>
+<dd><p>Processes the dns_explorer commands.</p>
 <dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>verbose</strong> – Enable verbose output.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if successful, False otherwise.</p>
+</dd>
 <dt class="field-odd">Exceptions<span class="colon">:</span></dt>
 <dd class="field-odd"><p>None.</p>
 </dd>
@@ -124,8 +136,9 @@ with this program. If not, see &lt;<a class="reference external" href="http://ww
     <ul>
 <li><a class="reference internal" href="#">dns_explorer.engine module</a><ul>
 <li><a class="reference internal" href="#dns_explorer.engine.DNSExplorer"><code class="docutils literal notranslate"><span class="pre">DNSExplorer</span></code></a><ul>
-<li><a class="reference internal" href="#dns_explorer.engine.DNSExplorer._abc_impl"><code class="docutils literal notranslate"><span class="pre">DNSExplorer._abc_impl</span></code></a></li>
-<li><a class="reference internal" href="#dns_explorer.engine.DNSExplorer._info_file"><code class="docutils literal notranslate"><span class="pre">DNSExplorer._info_file</span></code></a></li>
+<li><a class="reference internal" href="#dns_explorer.engine.DNSExplorer._cli"><code class="docutils literal notranslate"><span class="pre">DNSExplorer._cli</span></code></a></li>
+<li><a class="reference internal" href="#dns_explorer.engine.DNSExplorer._is_initialized"><code class="docutils literal notranslate"><span class="pre">DNSExplorer._is_initialized</span></code></a></li>
+<li><a class="reference internal" href="#dns_explorer.engine.DNSExplorer._logger"><code class="docutils literal notranslate"><span class="pre">DNSExplorer._logger</span></code></a></li>
 <li><a class="reference internal" href="#dns_explorer.engine.DNSExplorer.process"><code class="docutils literal notranslate"><span class="pre">DNSExplorer.process()</span></code></a></li>
 </ul>
 </li>
@@ -136,8 +149,8 @@ with this program. If not, see &lt;<a class="reference external" href="http://ww
   </div>
   <div>
     <h4>Previous topic</h4>
-    <p class="topless"><a href="dns_explorer.dns_explorer_bundle.html"
-                          title="previous chapter">dns_explorer.dns_explorer_bundle module</a></p>
+    <p class="topless"><a href="dns_explorer.setup.validator.html"
+                          title="previous chapter">dns_explorer.setup.validator module</a></p>
   </div>
   <div>
     <h4>Next topic</h4>
@@ -178,7 +191,7 @@ with this program. If not, see &lt;<a class="reference external" href="http://ww
           <a href="main.html" title="main module"
              >next</a> |</li>
         <li class="right" >
-          <a href="dns_explorer.dns_explorer_bundle.html" title="dns_explorer.dns_explorer_bundle module"
+          <a href="dns_explorer.setup.validator.html" title="dns_explorer.setup.validator module"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">dns_explorer https://github.com/vroncevic/dns_explorer/releases documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >dns_explorer</a> &#187;</li>

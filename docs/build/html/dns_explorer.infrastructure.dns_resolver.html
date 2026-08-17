@@ -15,8 +15,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="dns_explorer.infrastructure.explore_command module" href="dns_explorer.infrastructure.explore_command.html" />
-    <link rel="prev" title="dns_explorer.infrastructure.cli_bundle module" href="dns_explorer.infrastructure.cli_bundle.html" /> 
+    <link rel="next" title="dns_explorer.setup package" href="dns_explorer.setup.html" />
+    <link rel="prev" title="dns_explorer.infrastructure.command.reverse_command_executor module" href="dns_explorer.infrastructure.command.reverse_command_executor.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -28,10 +28,10 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="dns_explorer.infrastructure.explore_command.html" title="dns_explorer.infrastructure.explore_command module"
+          <a href="dns_explorer.setup.html" title="dns_explorer.setup package"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="dns_explorer.infrastructure.cli_bundle.html" title="dns_explorer.infrastructure.cli_bundle module"
+          <a href="dns_explorer.infrastructure.command.reverse_command_executor.html" title="dns_explorer.infrastructure.command.reverse_command_executor module"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">dns_explorer https://github.com/vroncevic/dns_explorer/releases documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >dns_explorer</a> &#187;</li>
@@ -68,8 +68,8 @@ with this program. If not, see &lt;<a class="reference external" href="http://ww
 </dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="dns_explorer.infrastructure.dns_resolver.DNSResolver">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dns_explorer.infrastructure.dns_resolver.</span></span><span class="sig-name descname"><span class="pre">DNSResolver</span></span><a class="reference internal" href="_modules/dns_explorer/infrastructure/dns_resolver.html#DNSResolver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dns_explorer.infrastructure.dns_resolver.DNSResolver" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="dns_explorer.domain.ports.idns_resolver.html#dns_explorer.domain.ports.idns_resolver.IDNSResolver" title="dns_explorer.domain.ports.idns_resolver.IDNSResolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">IDNSResolver</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">dns_explorer.infrastructure.dns_resolver.</span></span><span class="sig-name descname"><span class="pre">DNSResolver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/dns_explorer/infrastructure/dns_resolver.html#DNSResolver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dns_explorer.infrastructure.dns_resolver.DNSResolver" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="dns_explorer.core.service.idns_resolver.html#dns_explorer.core.service.idns_resolver.IDNSResolver" title="dns_explorer.core.service.idns_resolver.IDNSResolver"><code class="xref py py-class docutils literal notranslate"><span class="pre">IDNSResolver</span></code></a></p>
 <p>Concrete implementation of DNS resolver adapter.</p>
 <p>It defines:</p>
 <blockquote>
@@ -91,6 +91,11 @@ with this program. If not, see &lt;<a class="reference external" href="http://ww
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dns_explorer.infrastructure.dns_resolver.DNSResolver._abc_impl">
 <span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#dns_explorer.infrastructure.dns_resolver.DNSResolver._abc_impl" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dns_explorer.infrastructure.dns_resolver.DNSResolver._is_protocol">
+<span class="sig-name descname"><span class="pre">_is_protocol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#dns_explorer.infrastructure.dns_resolver.DNSResolver._is_protocol" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -201,6 +206,7 @@ with this program. If not, see &lt;<a class="reference external" href="http://ww
 <li><a class="reference internal" href="#">dns_explorer.infrastructure.dns_resolver module</a><ul>
 <li><a class="reference internal" href="#dns_explorer.infrastructure.dns_resolver.DNSResolver"><code class="docutils literal notranslate"><span class="pre">DNSResolver</span></code></a><ul>
 <li><a class="reference internal" href="#dns_explorer.infrastructure.dns_resolver.DNSResolver._abc_impl"><code class="docutils literal notranslate"><span class="pre">DNSResolver._abc_impl</span></code></a></li>
+<li><a class="reference internal" href="#dns_explorer.infrastructure.dns_resolver.DNSResolver._is_protocol"><code class="docutils literal notranslate"><span class="pre">DNSResolver._is_protocol</span></code></a></li>
 <li><a class="reference internal" href="#dns_explorer.infrastructure.dns_resolver.DNSResolver.is_initialized"><code class="docutils literal notranslate"><span class="pre">DNSResolver.is_initialized()</span></code></a></li>
 <li><a class="reference internal" href="#dns_explorer.infrastructure.dns_resolver.DNSResolver.resolve"><code class="docutils literal notranslate"><span class="pre">DNSResolver.resolve()</span></code></a></li>
 <li><a class="reference internal" href="#dns_explorer.infrastructure.dns_resolver.DNSResolver.resolve_record"><code class="docutils literal notranslate"><span class="pre">DNSResolver.resolve_record()</span></code></a></li>
@@ -214,13 +220,13 @@ with this program. If not, see &lt;<a class="reference external" href="http://ww
   </div>
   <div>
     <h4>Previous topic</h4>
-    <p class="topless"><a href="dns_explorer.infrastructure.cli_bundle.html"
-                          title="previous chapter">dns_explorer.infrastructure.cli_bundle module</a></p>
+    <p class="topless"><a href="dns_explorer.infrastructure.command.reverse_command_executor.html"
+                          title="previous chapter">dns_explorer.infrastructure.command.reverse_command_executor module</a></p>
   </div>
   <div>
     <h4>Next topic</h4>
-    <p class="topless"><a href="dns_explorer.infrastructure.explore_command.html"
-                          title="next chapter">dns_explorer.infrastructure.explore_command module</a></p>
+    <p class="topless"><a href="dns_explorer.setup.html"
+                          title="next chapter">dns_explorer.setup package</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -253,10 +259,10 @@ with this program. If not, see &lt;<a class="reference external" href="http://ww
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="dns_explorer.infrastructure.explore_command.html" title="dns_explorer.infrastructure.explore_command module"
+          <a href="dns_explorer.setup.html" title="dns_explorer.setup package"
              >next</a> |</li>
         <li class="right" >
-          <a href="dns_explorer.infrastructure.cli_bundle.html" title="dns_explorer.infrastructure.cli_bundle module"
+          <a href="dns_explorer.infrastructure.command.reverse_command_executor.html" title="dns_explorer.infrastructure.command.reverse_command_executor module"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">dns_explorer https://github.com/vroncevic/dns_explorer/releases documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >dns_explorer</a> &#187;</li>

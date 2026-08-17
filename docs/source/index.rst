@@ -34,7 +34,7 @@ other information that should be provided before the tool is installed.
    modules
 
 🚀 Installation
---------------
+-----------------
 
 |dns_explorer python3 build|
 
@@ -72,7 +72,7 @@ You can use Docker to create image/container, or You can use pip to install
     pip3 install dns_explorer
 
 📦 Dependencies
---------------
+-----------------
 
 **dns_explorer** requires next modules and libraries
 
@@ -80,7 +80,7 @@ You can use Docker to create image/container, or You can use pip to install
 * `dnspython - DNS toolkit for Python <https://pypi.org/project/dnspython/>`_
 
 📁 Tool structure
-----------------
+------------------
 
 **dns_explorer** is based on OOP.
 
@@ -151,7 +151,7 @@ Tool structure
      10 directories, 49 files
 
 🛠 Usage
--------
+---------
 
 Install package
 
@@ -195,7 +195,7 @@ Running tool for DNS exploring
 
 
 📄 Copyright and licence
------------------------
+---------------------------
 
 |license: gpl v3| |license: apache 2.0|
 
@@ -224,7 +224,7 @@ Lets help and support PSF.
    :target: https://www.python.org/psf/donations/
 
 Indices and tables
-------------------
+-------------------
 
 * :ref:`genindex`
 * :ref:`modindex`

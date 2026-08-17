@@ -7,9 +7,9 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   dns_explorer.application
-   dns_explorer.domain
+   dns_explorer.core
    dns_explorer.infrastructure
+   dns_explorer.setup
 
 Submodules
 ----------
@@ -17,7 +17,6 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
-   dns_explorer.dns_explorer_bundle
    dns_explorer.engine
 
 Module contents
