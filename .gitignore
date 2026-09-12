@@ -7,5 +7,5 @@ __pycache__/
 *.xml
 *.json
 .coverage
-.coverage.dns_explorer
 htmlcov/
+.coverage.dns_explorer

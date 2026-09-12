@@ -59,10 +59,12 @@
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">override</span>
-<span class="kn">from</span> <span class="nn">dns_explorer.core.service.iservice</span> <span class="kn">import</span> <span class="n">IService</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Sequence</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Final</span>
+
+<span class="kn">from</span> <span class="nn">dns_explorer.core.model.dns_record</span> <span class="kn">import</span> <span class="n">DNSRecord</span>
+<span class="kn">from</span> <span class="nn">dns_explorer.core.model.resolved_domain</span> <span class="kn">import</span> <span class="n">ResolvedDomain</span>
 <span class="kn">from</span> <span class="nn">dns_explorer.core.service.idns_resolver</span> <span class="kn">import</span> <span class="n">IDNSResolver</span>
-<span class="kn">from</span> <span class="nn">dns_explorer.core.model.models</span> <span class="kn">import</span> <span class="n">ResolvedDomain</span><span class="p">,</span> <span class="n">DNSRecord</span>
 
 <span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
 <span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;(C) 2026, https://vroncevic.github.io/dns_explorer&#39;</span>
@@ -83,8 +85,8 @@
 <span class="sd">        It defines:</span>
 
 <span class="sd">            :attributes:</span>
+<span class="sd">                | _SUBDOMAINS - Sequence of subdomains to explore.</span>
 <span class="sd">                | _dns_resolver - Adapter for DNS resolution operations.</span>
-<span class="sd">                | _SUBDOMAINS - List of subdomains to explore.</span>
 <span class="sd">            :methods:</span>
 <span class="sd">                | __init__ - Initializes the Service.</span>
 <span class="sd">                | explore - Explores DNS subdomains.</span>
@@ -94,12 +96,13 @@
 <span class="sd">                | is_initialized - Checks if the service and its adapters are initialized.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
-    <span class="n">_SUBDOMAINS</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">_SUBDOMAINS</span><span class="p">:</span> <span class="n">Final</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span>
         <span class="s1">&#39;www&#39;</span><span class="p">,</span> <span class="s1">&#39;mail&#39;</span><span class="p">,</span> <span class="s1">&#39;remote&#39;</span><span class="p">,</span> <span class="s1">&#39;blog&#39;</span><span class="p">,</span> <span class="s1">&#39;webmail&#39;</span><span class="p">,</span> <span class="s1">&#39;server&#39;</span><span class="p">,</span> <span class="s1">&#39;ns&#39;</span><span class="p">,</span> <span class="s1">&#39;smtp&#39;</span><span class="p">,</span>
         <span class="s1">&#39;pop&#39;</span><span class="p">,</span> <span class="s1">&#39;imap&#39;</span><span class="p">,</span> <span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="s1">&#39;secure&#39;</span><span class="p">,</span> <span class="s1">&#39;vpn&#39;</span><span class="p">,</span> <span class="s1">&#39;dns&#39;</span><span class="p">,</span> <span class="s1">&#39;ftp&#39;</span><span class="p">,</span> <span class="s1">&#39;test&#39;</span><span class="p">,</span>
         <span class="s1">&#39;portal&#39;</span><span class="p">,</span> <span class="s1">&#39;host&#39;</span><span class="p">,</span> <span class="s1">&#39;support&#39;</span><span class="p">,</span> <span class="s1">&#39;dev&#39;</span><span class="p">,</span> <span class="s1">&#39;web&#39;</span><span class="p">,</span> <span class="s1">&#39;mx&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;cloud&#39;</span><span class="p">,</span>
         <span class="s1">&#39;owa&#39;</span><span class="p">,</span> <span class="s1">&#39;cdn&#39;</span><span class="p">,</span> <span class="s1">&#39;api&#39;</span><span class="p">,</span> <span class="s1">&#39;exchange&#39;</span><span class="p">,</span> <span class="s1">&#39;mysql&#39;</span><span class="p">,</span> <span class="s1">&#39;wiki&#39;</span><span class="p">,</span> <span class="s1">&#39;cpanel&#39;</span>
-    <span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">_dns_resolver</span><span class="p">:</span> <span class="n">IDNSResolver</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dns_resolver</span><span class="p">:</span> <span class="n">IDNSResolver</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
@@ -111,6 +114,7 @@
 <span class="sd">                | TypeError:  The dns_resolver must be of type IDNSResolver.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">ctx</span> <span class="o">=</span> <span class="s1">&#39;service::init(...)&#39;</span>
+
         <span class="k">if</span> <span class="n">dns_resolver</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ctx</span><span class="si">}</span><span class="s1"> - the dns_resolver must be provided&#39;</span><span class="p">)</span>
 
@@ -121,32 +125,33 @@
 
 <div class="viewcode-block" id="Service.explore">
 <a class="viewcode-back" href="../../../../dns_explorer.core.service.engine.html#dns_explorer.core.service.engine.Service.explore">[docs]</a>
-    <span class="k">def</span> <span class="nf">explore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">cluster</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">ResolvedDomain</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">explore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">cluster</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">ResolvedDomain</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            Explores subdomains of a domain and resolves their DNS and reverse DNS.</span>
 
 <span class="sd">            :param domain: Base domain name to explore.</span>
 <span class="sd">            :param cluster: Number of subdomains in cluster to scan.</span>
-<span class="sd">            :param verbose: Enable/Disable verbose logging.</span>
 <span class="sd">            :return: List of resolved domains.</span>
 <span class="sd">            :exceptions:</span>
-<span class="sd">                | ValueError: domain must be provided.</span>
+<span class="sd">                | ValueError: The domain must be provided.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">ctx</span> <span class="o">=</span> <span class="s1">&#39;service::explore(...)&#39;</span>
+
         <span class="k">if</span> <span class="ow">not</span> <span class="n">domain</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;domain must be provided.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ctx</span><span class="si">}</span><span class="s1"> - the domain must be provided&#39;</span><span class="p">)</span>
 
         <span class="n">results</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ResolvedDomain</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="k">for</span> <span class="n">sub_domain</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_SUBDOMAINS</span><span class="p">:</span>
             <span class="n">sub_domain_final</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">sub_domain</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">domain</span><span class="si">}</span><span class="s1">&#39;</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_dns</span><span class="p">(</span><span class="n">sub_domain_final</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_dns</span><span class="p">(</span><span class="n">sub_domain_final</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
                 <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
 
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">cluster</span><span class="p">):</span>
                 <span class="n">sub_domain_multi</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">sub_domain</span><span class="si">}{</span><span class="n">i</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">domain</span><span class="si">}</span><span class="s1">&#39;</span>
-                <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_dns</span><span class="p">(</span><span class="n">sub_domain_multi</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+                <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_dns</span><span class="p">(</span><span class="n">sub_domain_multi</span><span class="p">)</span>
 
                 <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
                     <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
@@ -156,13 +161,13 @@
 
 <div class="viewcode-block" id="Service.check_dns">
 <a class="viewcode-back" href="../../../../dns_explorer.core.service.engine.html#dns_explorer.core.service.engine.Service.check_dns">[docs]</a>
-    <span class="k">def</span> <span class="nf">check_dns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ResolvedDomain</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">check_dns</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ResolvedDomain</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            Executes dns request and reverse DNS lookup.</span>
 
 <span class="sd">            :param domain: Domain name to check.</span>
-<span class="sd">            :param verbose: Enable/Disable verbose option.</span>
 <span class="sd">            :return: ResolvedDomain instance or None.</span>
+<span class="sd">            :exceptions: None.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">ip_address</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dns_resolver</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
@@ -192,10 +197,12 @@
 <span class="sd">            :param domain: Domain name.</span>
 <span class="sd">            :return: List of DNS records.</span>
 <span class="sd">            :exceptions:</span>
-<span class="sd">                | ValueError: domain must be provided.</span>
+<span class="sd">                | ValueError: The domain must be provided.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">ctx</span> <span class="o">=</span> <span class="s1">&#39;service::get_records(...)&#39;</span>
+
         <span class="k">if</span> <span class="ow">not</span> <span class="n">domain</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;domain must be provided.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ctx</span><span class="si">}</span><span class="s1"> - the domain must be provided&#39;</span><span class="p">)</span>
 
         <span class="n">record_types</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;AAAA&quot;</span><span class="p">,</span> <span class="s2">&quot;MX&quot;</span><span class="p">,</span> <span class="s2">&quot;NS&quot;</span><span class="p">,</span> <span class="s2">&quot;TXT&quot;</span><span class="p">,</span> <span class="s2">&quot;SOA&quot;</span><span class="p">]</span>
         <span class="n">records</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">DNSRecord</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
@@ -222,14 +229,17 @@
 <span class="sd">            :param ip: IP address.</span>
 <span class="sd">            :return: List of resolved hostnames.</span>
 <span class="sd">            :exceptions:</span>
-<span class="sd">                | ValueError: ip must be provided.</span>
+<span class="sd">                | ValueError: The ip must be provided.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">ctx</span> <span class="o">=</span> <span class="s1">&#39;service::reverse_resolve(...)&#39;</span>
+
         <span class="k">if</span> <span class="ow">not</span> <span class="n">ip</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;ip must be provided.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ctx</span><span class="si">}</span><span class="s1"> - the ip must be provided&#39;</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dns_resolver</span><span class="o">.</span><span class="n">reverse_resolve</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">res</span> <span class="k">if</span> <span class="n">res</span> <span class="k">else</span> <span class="p">[]</span>
+
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="k">pass</span>
 
@@ -243,6 +253,7 @@
 <span class="sd">            Checks if the service is initialized.</span>
 
 <span class="sd">            :return: True if the service is initialized, False otherwise.</span>
+<span class="sd">            :exceptions: None.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="nb">all</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_dns_resolver</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dns_resolver</span><span class="o">.</span><span class="n">is_initialized</span><span class="p">()])</span></div>
 </div>

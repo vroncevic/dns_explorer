@@ -2,7 +2,7 @@
 
 '''
 Module
-    models.py
+    resolved_domain.py
 Copyright
     Copyright (C) 2026 Vladimir Roncevic <elektron.ronca@gmail.com>
     dns_explorer is free software: you can redistribute it and/or modify it
@@ -16,21 +16,21 @@ Copyright
     You should have received a copy of the GNU General Public License along
     with this program. If not, see <http://www.gnu.org/licenses/>.
 Info
-    Defines domain models representing tool parameters and results.
+    Defines ResolvedDomain domain model representing a resolved domain.
 '''
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 
-__author__: str = 'Vladimir Roncevic'
-__copyright__: str = '(C) 2026, https://vroncevic.github.io/dns_explorer'
-__credits__: list[str] = ['Vladimir Roncevic', 'Python Software Foundation']
-__license__: str = 'https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE'
-__version__: str = '1.0.6'
-__maintainer__: str = 'Vladimir Roncevic'
-__email__: str = 'elektron.ronca@gmail.com'
-__status__: str = 'Development'
+__author__ = 'Vladimir Roncevic'
+__copyright__ = '(C) 2026, https://vroncevic.github.io/dns_explorer'
+__credits__ = ['Vladimir Roncevic', 'Python Software Foundation']
+__license__ = 'https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE'
+__version__ = '1.0.6'
+__maintainer__ = 'Vladimir Roncevic'
+__email__ = 'elektron.ronca@gmail.com'
+__status__ = 'Updated'
 
 
 @dataclass(frozen=True, slots=True, kw_only=True)
@@ -43,25 +43,18 @@ class ResolvedDomain:
             :attributes:
                 | domain - Resolved domain name.
                 | ip - IP address of the domain.
-                | reverse - List of reverse DNS hostnames.
+                | reverse - Tuple of reverse DNS hostnames.
+            :methods:
+                | __post_init__ - Ensures defensive copying of reverse hostnames to tuple.
     '''
 
     domain: str
     ip: str
-    reverse: list[str]
+    reverse: tuple[str, ...]
 
-
-@dataclass(frozen=True, slots=True, kw_only=True)
-class DNSRecord:
-    '''
-        Domain model representing a DNS record.
-
-        It defines:
-
-            :attributes:
-                | record_type - Type of the DNS record (A, MX, TXT, etc.).
-                | value - String representation of the record value.
-    '''
-
-    record_type: str
-    value: str
+    def __post_init__(self) -> None:
+        '''
+            Ensures reverse sequence is defensively copied to an immutable tuple.
+        '''
+        if not isinstance(self.reverse, tuple):
+            object.__setattr__(self, 'reverse', tuple(self.reverse))

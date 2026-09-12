@@ -5,12 +5,12 @@ permissions:
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ master, main ]
     paths:
       - 'dns_explorer/**/*.py'
       - 'setup.py'
   pull_request:
-    branches: [ dev ]
+    branches: [ master, main ]
     paths:
       - 'dns_explorer/**/*.py'
       - 'setup.py'

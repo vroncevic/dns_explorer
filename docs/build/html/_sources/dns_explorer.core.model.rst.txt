@@ -7,7 +7,8 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
-   dns_explorer.core.model.models
+   dns_explorer.core.model.dns_record
+   dns_explorer.core.model.resolved_domain
 
 Module contents
 ---------------

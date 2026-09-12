@@ -32,7 +32,7 @@ from ats_utilities.utils.reflection import to_str
 
 from dns_explorer.infrastructure.command.icommand_definition import ICommandDefinition
 from dns_explorer.core.service.iservice import IService
-from dns_explorer.core.model.models import DNSRecord
+from dns_explorer.core.model.dns_record import DNSRecord
 
 __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2026, https://vroncevic.github.io/dns_explorer'

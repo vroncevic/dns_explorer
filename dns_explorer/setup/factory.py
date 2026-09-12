@@ -21,6 +21,8 @@ Info
 
 from __future__ import annotations
 
+from os.path import abspath, dirname, join
+
 from ats_utilities.base.setup.factory import BaseBundleFactory
 from ats_utilities.base.setup.bundle import BaseBundle
 from ats_utilities.base.setup.options import BaseBundleOptions
@@ -73,7 +75,9 @@ class DNSExplorerBundleFactory:
                 | get_version - Returns the factory version.
     '''
 
-    _info_file: str = 'dns_explorer/infrastructure/config/dns_explorer.cfg'
+    _info_file: str = join(
+        dirname(dirname(abspath(__file__))), 'infrastructure', 'config', 'dns_explorer.cfg'
+    )
 
     @classmethod
     def create_bundle(cls, options: DNSExplorerBundleOptions | None = None) -> DNSExplorerBundle:

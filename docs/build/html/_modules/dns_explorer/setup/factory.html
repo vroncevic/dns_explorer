@@ -59,6 +59,8 @@
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">abspath</span><span class="p">,</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">join</span>
+
 <span class="kn">from</span> <span class="nn">ats_utilities.base.setup.factory</span> <span class="kn">import</span> <span class="n">BaseBundleFactory</span>
 <span class="kn">from</span> <span class="nn">ats_utilities.base.setup.bundle</span> <span class="kn">import</span> <span class="n">BaseBundle</span>
 <span class="kn">from</span> <span class="nn">ats_utilities.base.setup.options</span> <span class="kn">import</span> <span class="n">BaseBundleOptions</span>
@@ -113,7 +115,9 @@
 <span class="sd">                | get_version - Returns the factory version.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
-    <span class="n">_info_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;dns_explorer/infrastructure/config/dns_explorer.cfg&#39;</span>
+    <span class="n">_info_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span>
+        <span class="n">dirname</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))),</span> <span class="s1">&#39;infrastructure&#39;</span><span class="p">,</span> <span class="s1">&#39;config&#39;</span><span class="p">,</span> <span class="s1">&#39;dns_explorer.cfg&#39;</span>
+    <span class="p">)</span>
 
 <div class="viewcode-block" id="DNSExplorerBundleFactory.create_bundle">
 <a class="viewcode-back" href="../../../dns_explorer.setup.factory.html#dns_explorer.setup.factory.DNSExplorerBundleFactory.create_bundle">[docs]</a>

@@ -20,17 +20,15 @@ from ats_utilities.exceptions import ATSValueError
 from dns_explorer.engine import DNSExplorer
 from dns_explorer.setup.bundle import DNSExplorerBundle
 from dns_explorer.setup.factory import DNSExplorerBundleFactory
-from dns_explorer.core.service.iservice import IService
-from dns_explorer.core.service.idns_resolver import IDNSResolver
-from dns_explorer.core.model.models import ResolvedDomain, DNSRecord
-from dns_explorer.infrastructure.cli.icli import ICLI
+from dns_explorer.core.model.dns_record import DNSRecord
+from dns_explorer.core.model.resolved_domain import ResolvedDomain
 
 
-class DummyService(IService):
-    def explore(self, domain: str, cluster: int = 0, verbose: bool = False) -> list[ResolvedDomain]:
+class DummyService:
+    def explore(self, domain: str, cluster: int = 0) -> list[ResolvedDomain]:
         return []
 
-    def check_dns(self, domain: str, verbose: bool = False) -> ResolvedDomain | None:
+    def check_dns(self, domain: str) -> ResolvedDomain | None:
         return None
 
     def get_records(self, domain: str) -> list[DNSRecord]:
@@ -46,11 +44,14 @@ class DummyService(IService):
         return 'DummyService'
 
 
-class DummyDNSResolver(IDNSResolver):
-    def resolve(self, domain: str, record_type: str) -> list[str]:
-        return []
+class DummyDNSResolver:
+    def resolve(self, domain: str) -> str | None:
+        return '142.251.143.238'
 
-    def reverse(self, ip_address: str) -> list[str]:
+    def reverse_resolve(self, ip: str) -> list[str] | None:
+        return ['dns.google']
+
+    def resolve_record(self, domain: str, record_type: str) -> list[str]:
         return []
 
     def is_initialized(self) -> bool:
@@ -60,7 +61,7 @@ class DummyDNSResolver(IDNSResolver):
         return 'DummyDNSResolver'
 
 
-class DummyCLI(ICLI):
+class DummyCLI:
     def __init__(self, return_code: int = 0, stderr: str = '') -> None:
         self.return_code = return_code
         self.stderr = stderr
@@ -94,7 +95,7 @@ class TestDNSExplorer(unittest.TestCase):
                 context_bundle=context_bundle
             )
         )
-        
+
         dummy_service = DummyService()
         dummy_resolver = DummyDNSResolver()
         dummy_cli = DummyCLI(return_code=0)
@@ -119,7 +120,7 @@ class TestDNSExplorer(unittest.TestCase):
                 context_bundle=context_bundle
             )
         )
-        
+
         dummy_service = DummyService()
         dummy_resolver = DummyDNSResolver()
         dummy_cli = DummyCLI(return_code=1, stderr='CLI error')
@@ -144,7 +145,7 @@ class TestDNSExplorer(unittest.TestCase):
                 context_bundle=context_bundle
             )
         )
-        
+
         dummy_service = DummyService()
         dummy_resolver = DummyDNSResolver()
         dummy_cli = DummyCLI()
@@ -171,10 +172,10 @@ class TestDNSExplorer(unittest.TestCase):
                 context_bundle=context_bundle
             )
         )
-        
+
         dummy_service = DummyService()
         dummy_resolver = DummyDNSResolver()
-        
+
         dummy_cli = DummyCLI()
         dummy_cli.run = Mock(side_effect=Exception('Unexpected error'))
 
@@ -198,7 +199,7 @@ class TestDNSExplorer(unittest.TestCase):
                 context_bundle=context_bundle
             )
         )
-        
+
         dummy_service = DummyService()
         dummy_resolver = DummyDNSResolver()
         dummy_cli = DummyCLI()
@@ -218,7 +219,7 @@ class TestDNSExplorer(unittest.TestCase):
     @patch('dns_explorer.setup.validator.DNSExplorerBundleValidator.validate')
     def test_engine_init_generic_exception(self, mock_validate: Mock) -> None:
         mock_validate.side_effect = Exception('Unexpected generic validation error')
-        
+
         context_bundle = ContextBundleFactory.create_bundle()
         mock_base = BaseBundleFactory.create_bundle(
             options=BaseBundleOptions(
@@ -227,7 +228,7 @@ class TestDNSExplorer(unittest.TestCase):
                 context_bundle=context_bundle
             )
         )
-        
+
         dummy_service = DummyService()
         dummy_resolver = DummyDNSResolver()
         dummy_cli = DummyCLI()

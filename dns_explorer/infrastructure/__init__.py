@@ -18,6 +18,7 @@ Copyright
 Info
     Initialization module for the dns_explorer.infrastructure.
 '''
+from __future__ import annotations
 
 __author__: str = 'Vladimir Roncevic'
 __copyright__: str = '(C) 2026, https://vroncevic.github.io/dns_explorer'

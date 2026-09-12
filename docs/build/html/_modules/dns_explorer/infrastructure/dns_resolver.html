@@ -54,32 +54,33 @@
 <span class="sd">    You should have received a copy of the GNU General Public License along</span>
 <span class="sd">    with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
 <span class="sd">Info</span>
-<span class="sd">    Defines DNSResolver class implementing IDNSResolver.</span>
+<span class="sd">    Defines DNSResolver class implementing DNS resolution adapter.</span>
 <span class="sd">&#39;&#39;&#39;</span>
 
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">socket</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">override</span>
-<span class="kn">from</span> <span class="nn">dns.resolver</span> <span class="kn">import</span> <span class="n">resolve</span><span class="p">,</span> <span class="n">NXDOMAIN</span><span class="p">,</span> <span class="n">NoAnswer</span>
-<span class="kn">from</span> <span class="nn">dns.exception</span> <span class="kn">import</span> <span class="n">Timeout</span>
-<span class="kn">from</span> <span class="nn">ats_utilities.exceptions.ats_type_error</span> <span class="kn">import</span> <span class="n">ATSTypeError</span>
-<span class="kn">from</span> <span class="nn">ats_utilities.exceptions.ats_value_error</span> <span class="kn">import</span> <span class="n">ATSValueError</span>
-<span class="kn">from</span> <span class="nn">ats_utilities.utils.reflection</span> <span class="kn">import</span> <span class="n">to_str</span>
-<span class="kn">from</span> <span class="nn">dns_explorer.core.service.idns_resolver</span> <span class="kn">import</span> <span class="n">IDNSResolver</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="n">__author__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
-<span class="n">__copyright__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;(C) 2026, https://vroncevic.github.io/dns_explorer&#39;</span>
-<span class="n">__credits__</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Vladimir Roncevic&#39;</span><span class="p">,</span> <span class="s1">&#39;Python Software Foundation&#39;</span><span class="p">]</span>
-<span class="n">__license__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE&#39;</span>
-<span class="n">__version__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;1.0.6&#39;</span>
-<span class="n">__maintainer__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
-<span class="n">__email__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;elektron.ronca@gmail.com&#39;</span>
-<span class="n">__status__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Development&#39;</span>
+<span class="kn">from</span> <span class="nn">re</span> <span class="kn">import</span> <span class="n">search</span>
+<span class="kn">from</span> <span class="nn">socket</span> <span class="kn">import</span> <span class="n">gethostbyaddr</span><span class="p">,</span> <span class="n">herror</span>
+
+<span class="kn">from</span> <span class="nn">ats_utilities.utils.reflection</span> <span class="kn">import</span> <span class="n">to_str</span>
+<span class="kn">from</span> <span class="nn">ats_utilities.validation.check_type</span> <span class="kn">import</span> <span class="n">istype</span>
+<span class="kn">from</span> <span class="nn">ats_utilities.validation.check_value</span> <span class="kn">import</span> <span class="n">not_empty</span>
+<span class="kn">from</span> <span class="nn">dns.exception</span> <span class="kn">import</span> <span class="n">Timeout</span>
+<span class="kn">from</span> <span class="nn">dns.resolver</span> <span class="kn">import</span> <span class="n">NXDOMAIN</span><span class="p">,</span> <span class="n">NoAnswer</span><span class="p">,</span> <span class="n">resolve</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;(C) 2026, https://vroncevic.github.io/dns_explorer&#39;</span>
+<span class="n">__credits__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Vladimir Roncevic&#39;</span><span class="p">,</span> <span class="s1">&#39;Python Software Foundation&#39;</span><span class="p">]</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.0.6&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;elektron.ronca@gmail.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Updated&#39;</span>
 
 
 <div class="viewcode-block" id="DNSResolver">
 <a class="viewcode-back" href="../../../dns_explorer.infrastructure.dns_resolver.html#dns_explorer.infrastructure.dns_resolver.DNSResolver">[docs]</a>
-<span class="k">class</span> <span class="nc">DNSResolver</span><span class="p">(</span><span class="n">IDNSResolver</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">DNSResolver</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Concrete implementation of DNS resolver adapter.</span>
 
@@ -96,125 +97,110 @@
 
 <div class="viewcode-block" id="DNSResolver.resolve">
 <a class="viewcode-back" href="../../../dns_explorer.infrastructure.dns_resolver.html#dns_explorer.infrastructure.dns_resolver.DNSResolver.resolve">[docs]</a>
-    <span class="nd">@override</span>
     <span class="k">def</span> <span class="nf">resolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            Resolves a domain name to an IP address.</span>
 
 <span class="sd">            :param domain: The domain name to resolve.</span>
-<span class="sd">            :type domain: &lt;str&gt;</span>
 <span class="sd">            :return: The resolved IP address or None.</span>
-<span class="sd">            :rtype: &lt;str | None&gt;</span>
 <span class="sd">            :exceptions:</span>
 <span class="sd">                | ATSTypeError: Domain parameter must be a string.</span>
 <span class="sd">                | ATSValueError: Domain parameter cannot be empty.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">ATSTypeError</span><span class="p">(</span><span class="s2">&quot;domain must be a string&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">domain</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ATSValueError</span><span class="p">(</span><span class="s2">&quot;missing domain name&quot;</span><span class="p">)</span>
+        <span class="n">ctx</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;dns_resolver::resolve(...)&#39;</span>
+        <span class="n">istype</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="s1">&#39;domain must be a string&#39;</span><span class="p">)</span>
+        <span class="n">not_empty</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="s1">&#39;missing domain name&#39;</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">result</span> <span class="o">=</span> <span class="n">resolve</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
+
             <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
                 <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;\b(?:[0-9]{1,3}\.)</span><span class="si">{3}</span><span class="s1">[0-9]{1,3}\b&#39;</span>
-                <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">rrset</span><span class="p">))</span>
+                <span class="n">match</span> <span class="o">=</span> <span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">rrset</span><span class="p">))</span>
+
                 <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
         <span class="k">except</span> <span class="p">(</span><span class="n">NXDOMAIN</span><span class="p">,</span> <span class="n">Timeout</span><span class="p">,</span> <span class="n">NoAnswer</span><span class="p">):</span>
             <span class="k">pass</span>
+
         <span class="k">return</span> <span class="kc">None</span></div>
 
 
 <div class="viewcode-block" id="DNSResolver.reverse_resolve">
 <a class="viewcode-back" href="../../../dns_explorer.infrastructure.dns_resolver.html#dns_explorer.infrastructure.dns_resolver.DNSResolver.reverse_resolve">[docs]</a>
-    <span class="nd">@override</span>
     <span class="k">def</span> <span class="nf">reverse_resolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            Performs reverse DNS lookup on an IP address.</span>
 
 <span class="sd">            :param ip: The IP address.</span>
-<span class="sd">            :type ip: &lt;str&gt;</span>
 <span class="sd">            :return: The list of resolved hostnames or None.</span>
-<span class="sd">            :rtype: &lt;list[str] | None&gt;</span>
 <span class="sd">            :exceptions:</span>
 <span class="sd">                | ATSTypeError: IP parameter must be a string.</span>
 <span class="sd">                | ATSValueError: IP parameter cannot be empty.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">ATSTypeError</span><span class="p">(</span><span class="s2">&quot;ip must be a string&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">ip</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ATSValueError</span><span class="p">(</span><span class="s2">&quot;missing ip address&quot;</span><span class="p">)</span>
+        <span class="n">ctx</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;dns_resolver::reverse_resolve(...)&#39;</span>
+        <span class="n">istype</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="s1">&#39;ip must be a string&#39;</span><span class="p">)</span>
+        <span class="n">not_empty</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="s1">&#39;missing ip address&#39;</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostbyaddr</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">gethostbyaddr</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
             <span class="k">return</span> <span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">except</span> <span class="n">socket</span><span class="o">.</span><span class="n">herror</span><span class="p">:</span>
+
+        <span class="k">except</span> <span class="n">herror</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span></div>
 
 
 <div class="viewcode-block" id="DNSResolver.resolve_record">
 <a class="viewcode-back" href="../../../dns_explorer.infrastructure.dns_resolver.html#dns_explorer.infrastructure.dns_resolver.DNSResolver.resolve_record">[docs]</a>
-    <span class="nd">@override</span>
     <span class="k">def</span> <span class="nf">resolve_record</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">record_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            Queries specific DNS records for a domain.</span>
 
 <span class="sd">            :param domain: The domain name.</span>
-<span class="sd">            :type domain: &lt;str&gt;</span>
 <span class="sd">            :param record_type: The DNS record type.</span>
-<span class="sd">            :type record_type: &lt;str&gt;</span>
 <span class="sd">            :return: List of record values.</span>
-<span class="sd">            :rtype: &lt;list[str]&gt;</span>
 <span class="sd">            :exceptions:</span>
 <span class="sd">                | ATSTypeError: Domain parameter must be a string.</span>
 <span class="sd">                | ATSValueError: Domain parameter cannot be empty.</span>
 <span class="sd">                | ATSTypeError: Record type parameter must be a string.</span>
 <span class="sd">                | ATSValueError: Record type parameter cannot be empty.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">ATSTypeError</span><span class="p">(</span><span class="s2">&quot;domain must be a string&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">domain</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ATSValueError</span><span class="p">(</span><span class="s2">&quot;missing domain name&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">record_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="n">ATSTypeError</span><span class="p">(</span><span class="s2">&quot;record_type must be a string&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">record_type</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ATSValueError</span><span class="p">(</span><span class="s2">&quot;missing record type&quot;</span><span class="p">)</span>
+        <span class="n">ctx</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;dns_resolver::resolve_record(...)&#39;</span>
+        <span class="n">istype</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="s1">&#39;domain must be a string&#39;</span><span class="p">)</span>
+        <span class="n">not_empty</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="s1">&#39;missing domain name&#39;</span><span class="p">)</span>
+        <span class="n">istype</span><span class="p">(</span><span class="n">record_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="s1">&#39;record_type must be a string&#39;</span><span class="p">)</span>
+        <span class="n">not_empty</span><span class="p">(</span><span class="n">record_type</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="s1">&#39;missing record type&#39;</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">result</span> <span class="o">=</span> <span class="n">resolve</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="n">record_type</span><span class="p">)</span>
             <span class="k">return</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">rdata</span><span class="p">)</span> <span class="k">for</span> <span class="n">rdata</span> <span class="ow">in</span> <span class="n">result</span><span class="p">]</span>
+
         <span class="k">except</span> <span class="p">(</span><span class="n">NXDOMAIN</span><span class="p">,</span> <span class="n">Timeout</span><span class="p">,</span> <span class="n">NoAnswer</span><span class="p">):</span>
             <span class="k">pass</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="k">pass</span>
+
         <span class="k">return</span> <span class="p">[]</span></div>
 
 
 <div class="viewcode-block" id="DNSResolver.is_initialized">
 <a class="viewcode-back" href="../../../dns_explorer.infrastructure.dns_resolver.html#dns_explorer.infrastructure.dns_resolver.DNSResolver.is_initialized">[docs]</a>
-    <span class="nd">@override</span>
     <span class="k">def</span> <span class="nf">is_initialized</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            Checks if the resolver is initialized.</span>
 
 <span class="sd">            :return: True if initialized, False otherwise.</span>
-<span class="sd">            :rtype: &lt;bool&gt;</span>
 <span class="sd">            :exceptions: None.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
 
-    <span class="nd">@override</span>
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            Returns the DNSResolver as string representation.</span>
 
 <span class="sd">            :return: The DNSResolver as string representation.</span>
-<span class="sd">            :rtype: &lt;str&gt;</span>
 <span class="sd">            :exceptions: None.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="n">to_str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>

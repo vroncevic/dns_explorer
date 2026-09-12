@@ -18,19 +18,20 @@ Copyright
 Info
     Defines setup for tool dns_explorer.
 '''
+from __future__ import annotations
 
 from os import walk
 from os.path import abspath, dirname, join, relpath
 from setuptools import setup, find_packages
 
-__author__: str = 'Vladimir Roncevic'
-__copyright__: str = '(C) 2026, https://vroncevic.github.io/dns_explorer'
-__credits__: list[str] = ['Vladimir Roncevic', 'Python Software Foundation']
-__license__: str = 'https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE'
-__version__: str = '1.0.6'
-__maintainer__: str = 'Vladimir Roncevic'
-__email__: str = 'elektron.ronca@gmail.com'
-__status__: str = 'Updated'
+__author__ = 'Vladimir Roncevic'
+__copyright__ = '(C) 2026, https://vroncevic.github.io/dns_explorer'
+__credits__ = ['Vladimir Roncevic', 'Python Software Foundation']
+__license__ = 'https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE'
+__version__ = '1.0.6'
+__maintainer__ = 'Vladimir Roncevic'
+__email__ = 'elektron.ronca@gmail.com'
+__status__ = 'Updated'
 
 THIS_DIR: str = abspath(dirname(__file__))
 long_description: str | None = None

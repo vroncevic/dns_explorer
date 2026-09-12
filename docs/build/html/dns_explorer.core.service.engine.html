@@ -77,8 +77,8 @@ with this program. If not, see &lt;<a class="reference external" href="http://ww
 <div><dl class="field-list">
 <dt class="field-odd">attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><div class="line-block">
+<div class="line">_SUBDOMAINS - Sequence of subdomains to explore.</div>
 <div class="line">_dns_resolver - Adapter for DNS resolution operations.</div>
-<div class="line">_SUBDOMAINS - List of subdomains to explore.</div>
 </div>
 </dd>
 <dt class="field-even">methods<span class="colon">:</span></dt>
@@ -95,36 +95,40 @@ with this program. If not, see &lt;<a class="reference external" href="http://ww
 </div></blockquote>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="dns_explorer.core.service.engine.Service._SUBDOMAINS">
-<span class="sig-name descname"><span class="pre">_SUBDOMAINS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['www',</span> <span class="pre">'mail',</span> <span class="pre">'remote',</span> <span class="pre">'blog',</span> <span class="pre">'webmail',</span> <span class="pre">'server',</span> <span class="pre">'ns',</span> <span class="pre">'smtp',</span> <span class="pre">'pop',</span> <span class="pre">'imap',</span> <span class="pre">'admin',</span> <span class="pre">'secure',</span> <span class="pre">'vpn',</span> <span class="pre">'dns',</span> <span class="pre">'ftp',</span> <span class="pre">'test',</span> <span class="pre">'portal',</span> <span class="pre">'host',</span> <span class="pre">'support',</span> <span class="pre">'dev',</span> <span class="pre">'web',</span> <span class="pre">'mx',</span> <span class="pre">'email',</span> <span class="pre">'cloud',</span> <span class="pre">'owa',</span> <span class="pre">'cdn',</span> <span class="pre">'api',</span> <span class="pre">'exchange',</span> <span class="pre">'mysql',</span> <span class="pre">'wiki',</span> <span class="pre">'cpanel']</span></em><a class="headerlink" href="#dns_explorer.core.service.engine.Service._SUBDOMAINS" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">_SUBDOMAINS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span><span class="p"><span class="pre">[</span></span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('www',</span> <span class="pre">'mail',</span> <span class="pre">'remote',</span> <span class="pre">'blog',</span> <span class="pre">'webmail',</span> <span class="pre">'server',</span> <span class="pre">'ns',</span> <span class="pre">'smtp',</span> <span class="pre">'pop',</span> <span class="pre">'imap',</span> <span class="pre">'admin',</span> <span class="pre">'secure',</span> <span class="pre">'vpn',</span> <span class="pre">'dns',</span> <span class="pre">'ftp',</span> <span class="pre">'test',</span> <span class="pre">'portal',</span> <span class="pre">'host',</span> <span class="pre">'support',</span> <span class="pre">'dev',</span> <span class="pre">'web',</span> <span class="pre">'mx',</span> <span class="pre">'email',</span> <span class="pre">'cloud',</span> <span class="pre">'owa',</span> <span class="pre">'cdn',</span> <span class="pre">'api',</span> <span class="pre">'exchange',</span> <span class="pre">'mysql',</span> <span class="pre">'wiki',</span> <span class="pre">'cpanel')</span></em><a class="headerlink" href="#dns_explorer.core.service.engine.Service._SUBDOMAINS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="dns_explorer.core.service.engine.Service._dns_resolver">
+<span class="sig-name descname"><span class="pre">_dns_resolver</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="dns_explorer.core.service.idns_resolver.html#dns_explorer.core.service.idns_resolver.IDNSResolver" title="dns_explorer.core.service.idns_resolver.IDNSResolver"><span class="pre">IDNSResolver</span></a></em><a class="headerlink" href="#dns_explorer.core.service.engine.Service._dns_resolver" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="dns_explorer.core.service.engine.Service.check_dns">
-<span class="sig-name descname"><span class="pre">check_dns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="dns_explorer.core.model.models.html#dns_explorer.core.model.models.ResolvedDomain" title="dns_explorer.core.model.models.ResolvedDomain"><span class="pre">ResolvedDomain</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dns_explorer/core/service/engine.html#Service.check_dns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dns_explorer.core.service.engine.Service.check_dns" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_dns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="dns_explorer.core.model.resolved_domain.html#dns_explorer.core.model.resolved_domain.ResolvedDomain" title="dns_explorer.core.model.resolved_domain.ResolvedDomain"><span class="pre">ResolvedDomain</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/dns_explorer/core/service/engine.html#Service.check_dns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dns_explorer.core.service.engine.Service.check_dns" title="Link to this definition">¶</a></dt>
 <dd><p>Executes dns request and reverse DNS lookup.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>domain</strong> – Domain name to check.</p></li>
-<li><p><strong>verbose</strong> – Enable/Disable verbose option.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>domain</strong> – Domain name to check.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>ResolvedDomain instance or None.</p>
+</dd>
+<dt class="field-odd">Exceptions<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="dns_explorer.core.service.engine.Service.explore">
-<span class="sig-name descname"><span class="pre">explore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="dns_explorer.core.model.models.html#dns_explorer.core.model.models.ResolvedDomain" title="dns_explorer.core.model.models.ResolvedDomain"><span class="pre">ResolvedDomain</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/dns_explorer/core/service/engine.html#Service.explore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dns_explorer.core.service.engine.Service.explore" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">explore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="dns_explorer.core.model.resolved_domain.html#dns_explorer.core.model.resolved_domain.ResolvedDomain" title="dns_explorer.core.model.resolved_domain.ResolvedDomain"><span class="pre">ResolvedDomain</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/dns_explorer/core/service/engine.html#Service.explore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dns_explorer.core.service.engine.Service.explore" title="Link to this definition">¶</a></dt>
 <dd><p>Explores subdomains of a domain and resolves their DNS and reverse DNS.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>domain</strong> – Base domain name to explore.</p></li>
 <li><p><strong>cluster</strong> – Number of subdomains in cluster to scan.</p></li>
-<li><p><strong>verbose</strong> – Enable/Disable verbose logging.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -132,7 +136,7 @@ with this program. If not, see &lt;<a class="reference external" href="http://ww
 </dd>
 <dt class="field-odd">Exceptions<span class="colon">:</span></dt>
 <dd class="field-odd"><div class="line-block">
-<div class="line">ValueError: domain must be provided.</div>
+<div class="line">ValueError: The domain must be provided.</div>
 </div>
 </dd>
 </dl>
@@ -140,7 +144,7 @@ with this program. If not, see &lt;<a class="reference external" href="http://ww
 
 <dl class="py method">
 <dt class="sig sig-object py" id="dns_explorer.core.service.engine.Service.get_records">
-<span class="sig-name descname"><span class="pre">get_records</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="dns_explorer.core.model.models.html#dns_explorer.core.model.models.DNSRecord" title="dns_explorer.core.model.models.DNSRecord"><span class="pre">DNSRecord</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/dns_explorer/core/service/engine.html#Service.get_records"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dns_explorer.core.service.engine.Service.get_records" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_records</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="dns_explorer.core.model.dns_record.html#dns_explorer.core.model.dns_record.DNSRecord" title="dns_explorer.core.model.dns_record.DNSRecord"><span class="pre">DNSRecord</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/dns_explorer/core/service/engine.html#Service.get_records"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#dns_explorer.core.service.engine.Service.get_records" title="Link to this definition">¶</a></dt>
 <dd><p>Queries various DNS records for a domain.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -151,7 +155,7 @@ with this program. If not, see &lt;<a class="reference external" href="http://ww
 </dd>
 <dt class="field-odd">Exceptions<span class="colon">:</span></dt>
 <dd class="field-odd"><div class="line-block">
-<div class="line">ValueError: domain must be provided.</div>
+<div class="line">ValueError: The domain must be provided.</div>
 </div>
 </dd>
 </dl>
@@ -164,6 +168,9 @@ with this program. If not, see &lt;<a class="reference external" href="http://ww
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if the service is initialized, False otherwise.</p>
+</dd>
+<dt class="field-even">Exceptions<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -181,7 +188,7 @@ with this program. If not, see &lt;<a class="reference external" href="http://ww
 </dd>
 <dt class="field-odd">Exceptions<span class="colon">:</span></dt>
 <dd class="field-odd"><div class="line-block">
-<div class="line">ValueError: ip must be provided.</div>
+<div class="line">ValueError: The ip must be provided.</div>
 </div>
 </dd>
 </dl>
@@ -204,6 +211,7 @@ with this program. If not, see &lt;<a class="reference external" href="http://ww
 <li><a class="reference internal" href="#">dns_explorer.core.service.engine module</a><ul>
 <li><a class="reference internal" href="#dns_explorer.core.service.engine.Service"><code class="docutils literal notranslate"><span class="pre">Service</span></code></a><ul>
 <li><a class="reference internal" href="#dns_explorer.core.service.engine.Service._SUBDOMAINS"><code class="docutils literal notranslate"><span class="pre">Service._SUBDOMAINS</span></code></a></li>
+<li><a class="reference internal" href="#dns_explorer.core.service.engine.Service._dns_resolver"><code class="docutils literal notranslate"><span class="pre">Service._dns_resolver</span></code></a></li>
 <li><a class="reference internal" href="#dns_explorer.core.service.engine.Service.check_dns"><code class="docutils literal notranslate"><span class="pre">Service.check_dns()</span></code></a></li>
 <li><a class="reference internal" href="#dns_explorer.core.service.engine.Service.explore"><code class="docutils literal notranslate"><span class="pre">Service.explore()</span></code></a></li>
 <li><a class="reference internal" href="#dns_explorer.core.service.engine.Service.get_records"><code class="docutils literal notranslate"><span class="pre">Service.get_records()</span></code></a></li>

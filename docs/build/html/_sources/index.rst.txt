@@ -9,7 +9,7 @@ The README is used to introduce the tool and provide instructions on
 how to install the tool, any machine dependencies it may have and any
 other information that should be provided before the tool is installed.
 
-|dns_explorer python checker| |dns_explorer python package| |github issues| |documentation status| |github contributors|
+|dns_explorer python checker| |dns_explorer python package| |dns_explorer interface checker| |dns_explorer isp checker| |dns_explorer srp checker| |github issues| |documentation status| |github contributors|
 
 .. |dns_explorer python checker| image:: https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_python_checker.yml/badge.svg
    :target: https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_python_checker.yml
@@ -17,13 +17,22 @@ other information that should be provided before the tool is installed.
 .. |dns_explorer python package| image:: https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_package_checker.yml/badge.svg
    :target: https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_package.yml
 
+.. |dns_explorer interface checker| image:: https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_interface_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_interface_checker.yml
+
+.. |dns_explorer isp checker| image:: https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_isp_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_isp_checker.yml
+
+.. |dns_explorer srp checker| image:: https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_srp_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_srp_checker.yml
+
 .. |github issues| image:: https://img.shields.io/github/issues/vroncevic/dns_explorer.svg
    :target: https://github.com/vroncevic/dns_explorer/issues
 
 .. |github contributors| image:: https://img.shields.io/github/contributors/vroncevic/dns_explorer.svg
    :target: https://github.com/vroncevic/dns_explorer/graphs/contributors
 
-.. |documentation status| image:: https://readthedocs.org/projects/dns_explorer/badge/?version=latest
+.. |documentation status| image:: https://readthedocs.org/projects/dns-explorer/badge/?version=latest
    :target: https://dns-explorer.readthedocs.io/en/latest/?badge=latest
 
 .. toctree::
@@ -92,8 +101,9 @@ Tool structure
          ├── core/
          │   ├── __init__.py
          │   ├── model/
+         │   │   ├── dns_record.py
          │   │   ├── __init__.py
-         │   │   └── models.py
+         │   │   └── resolved_domain.py
          │   └── service/
          │       ├── engine.py
          │       ├── idns_resolver.py
@@ -148,7 +158,7 @@ Tool structure
              ├── registry.py
              └── validator.py
 
-     10 directories, 49 files
+     10 directories, 50 files
 
 🛠 Usage
 ---------

@@ -1,12 +1,12 @@
 name: dns_explorer_package_checker
 on:
   push:
-    branches: [ main ]
+    branches: [ master, main ]
     paths:
       - 'dns_explorer/**'
       - 'setup.py'
   pull_request:
-    branches: [ main ]
+    branches: [ master, main ]
     paths:
       - 'dns_explorer/**'
       - 'setup.py'

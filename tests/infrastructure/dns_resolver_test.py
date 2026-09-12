@@ -31,7 +31,7 @@ class TestDNSResolver(unittest.TestCase):
         result = resolver.resolve("google.com")
         self.assertEqual(result, "142.251.143.238")
 
-    @patch('socket.gethostbyaddr')
+    @patch('dns_explorer.infrastructure.dns_resolver.gethostbyaddr')
     def test_reverse_resolve_success(self, mock_gethostbyaddr: Mock) -> None:
         mock_gethostbyaddr.return_value = ("dns.google", [], ["8.8.8.8"])
 
@@ -102,10 +102,10 @@ class TestDNSResolver(unittest.TestCase):
         with self.assertRaises(ATSValueError):
             resolver.reverse_resolve("")
 
-    @patch('socket.gethostbyaddr')
+    @patch('dns_explorer.infrastructure.dns_resolver.gethostbyaddr')
     def test_reverse_resolve_herror(self, mock_gethostbyaddr: Mock) -> None:
-        import socket
-        mock_gethostbyaddr.side_effect = socket.herror()
+        from socket import herror
+        mock_gethostbyaddr.side_effect = herror()
         resolver = DNSResolver()
         self.assertIsNone(resolver.reverse_resolve("8.8.8.8"))
 

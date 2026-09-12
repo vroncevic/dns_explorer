@@ -54,7 +54,7 @@ class TestService(unittest.TestCase):
         self.assertTrue(len(result) > 31)
         self.assertEqual(result[0].domain, "www.google.com")
         self.assertEqual(result[0].ip, "142.251.143.238")
-        self.assertEqual(result[0].reverse, ["dns.google"])
+        self.assertEqual(result[0].reverse, ("dns.google",))
 
     def test_service_check_dns(self) -> None:
         resolver = DummyDNSResolver()
@@ -66,7 +66,7 @@ class TestService(unittest.TestCase):
         self.assertIsNotNone(res)
         self.assertEqual(res.domain, "google.com")
         self.assertEqual(res.ip, "142.251.143.238")
-        self.assertEqual(res.reverse, ["dns.google"])
+        self.assertEqual(res.reverse, ("dns.google",))
 
     def test_service_get_records(self) -> None:
         resolver = DummyDNSResolver()
