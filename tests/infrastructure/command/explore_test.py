@@ -15,7 +15,7 @@ from unittest.mock import Mock
 from ats_utilities.exceptions import ATSValueError
 from dns_explorer.infrastructure.command.explore_command_definition import ExploreCommandDefinition
 from dns_explorer.infrastructure.command.explore_command_executor import ExploreCommandExecutor
-from dns_explorer.core.model.models import ResolvedDomain
+from dns_explorer.core.model.resolved_domain import ResolvedDomain
 
 
 class MockContextBundle:
@@ -29,7 +29,7 @@ class MockService:
     def __init__(self, resolved_domains=None):
         self.resolved_domains = resolved_domains if resolved_domains is not None else []
 
-    def explore(self, domain: str, cluster: int, verbose: bool = False) -> list[ResolvedDomain]:
+    def explore(self, domain: str, cluster: int) -> list[ResolvedDomain]:
         return self.resolved_domains
 
 

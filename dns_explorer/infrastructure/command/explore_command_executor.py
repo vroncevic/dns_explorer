@@ -32,13 +32,13 @@ from ats_utilities.utils.reflection import to_str
 
 from dns_explorer.infrastructure.command.icommand_definition import ICommandDefinition
 from dns_explorer.core.service.iservice import IService
-from dns_explorer.core.model.models import ResolvedDomain
+from dns_explorer.core.model.resolved_domain import ResolvedDomain
 
 __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2026, https://vroncevic.github.io/dns_explorer'
 __credits__ = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE'
-__version__ = '1.0.6'
+__version__ = '1.0.7'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -97,12 +97,12 @@ class ExploreCommandExecutor:
 
         self._reporter.success([f"\n    dns_explorer::pro::dns_processor Checking dns {domain}\n"])
 
-        resolved_domains: list[ResolvedDomain] = service.explore(domain=domain, cluster=cluster, verbose=verbose)
+        resolved_domains: list[ResolvedDomain] = service.explore(domain=domain, cluster=cluster)
 
         for item in resolved_domains:
             sub_domain: str = item.domain
             ip_address: str = item.ip
-            dns_reverse: list[str] = item.reverse
+            dns_reverse: tuple[str, ...] = item.reverse
 
             if verbose:
                 self._reporter.success([f"        dns_explorer::pro::dns_processor check IP {ip_address}"])

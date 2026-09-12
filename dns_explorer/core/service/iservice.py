@@ -22,13 +22,15 @@ Info
 from __future__ import annotations
 
 from typing import Protocol, runtime_checkable
-from dns_explorer.core.model.models import ResolvedDomain, DNSRecord
+
+from dns_explorer.core.model.dns_record import DNSRecord
+from dns_explorer.core.model.resolved_domain import ResolvedDomain
 
 __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2026, https://vroncevic.github.io/dns_explorer'
 __credits__ = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE'
-__version__ = '1.0.6'
+__version__ = '1.0.7'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -49,22 +51,20 @@ class IService(Protocol):
                 | is_initialized - Checks if the service is initialized.
     '''
 
-    def explore(self, domain: str, cluster: int, verbose: bool = False) -> list[ResolvedDomain]:
+    def explore(self, domain: str, cluster: int) -> list[ResolvedDomain]:
         '''
             Explores subdomains of a domain and resolves their DNS and reverse DNS.
 
             :param domain: Base domain name to explore.
             :param cluster: Number of subdomains in cluster to scan.
-            :param verbose: Enable/Disable verbose logging.
             :return: List of resolved domains.
         '''
 
-    def check_dns(self, domain: str, verbose: bool = False) -> ResolvedDomain | None:
+    def check_dns(self, domain: str) -> ResolvedDomain | None:
         '''
             Executes dns request and reverse DNS lookup for a single domain.
 
             :param domain: Domain name to check.
-            :param verbose: Enable/Disable verbose option.
             :return: ResolvedDomain instance or None.
         '''
 

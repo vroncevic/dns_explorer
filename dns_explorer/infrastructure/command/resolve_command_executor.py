@@ -26,18 +26,18 @@ from collections.abc import Mapping
 from ats_utilities.context.bundle import ContextBundle
 from ats_utilities.checker.ichecker import IChecker
 from ats_utilities.reporter.ireporter import IReporter
-from ats_utilities.exceptions import ATSValueError
 from ats_utilities.utils.reflection import to_str
+from ats_utilities.validation.check_value import not_none
 
 from dns_explorer.infrastructure.command.icommand_definition import ICommandDefinition
 from dns_explorer.core.service.iservice import IService
-from dns_explorer.core.model.models import ResolvedDomain
+from dns_explorer.core.model.resolved_domain import ResolvedDomain
 
 __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2026, https://vroncevic.github.io/dns_explorer'
 __credits__ = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE'
-__version__ = '1.0.6'
+__version__ = '1.0.7'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -74,8 +74,8 @@ class ResolveCommandExecutor:
             :exceptions:
                 | ATSValueError: If the context bundle is not provided.
         '''
-        if not bundle:
-            raise ATSValueError('context bundle must be provided.')
+        ctx: str = 'resolve_command_executor::init(...)'
+        not_none(bundle, ctx, 'context bundle must be provided')
 
         self.definition = definition
         self._checker = bundle.checker
@@ -97,7 +97,7 @@ class ResolveCommandExecutor:
         if verbose:
             self._reporter.success([f"\n    dns_explorer::pro::dns_processor Resolving single domain {domain}\n"])
 
-        res: ResolvedDomain | None = service.check_dns(domain=domain, verbose=verbose)
+        res: ResolvedDomain | None = service.check_dns(domain=domain)
 
         if res:
             self._reporter.success([f"\n    Resolved: {res.domain}"])
@@ -110,10 +110,10 @@ class ResolveCommandExecutor:
             self._reporter.success([""])
 
             return {"returncode": 0, "stdout": f"resolved {domain}", "stderr": ""}
-        else:
-            self._reporter.success([f"\nResolution failed for {domain}\n"])
 
-            return {"returncode": 1, "stdout": "", "stderr": f"resolution failed for {domain}"}
+        self._reporter.success([f"\nResolution failed for {domain}\n"])
+
+        return {"returncode": 1, "stdout": "", "stderr": f"resolution failed for {domain}"}
 
     def get_definition(self) -> ICommandDefinition:
         '''

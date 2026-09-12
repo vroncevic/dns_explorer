@@ -16,30 +16,31 @@ Copyright
     You should have received a copy of the GNU General Public License along
     with this program. If not, see <http://www.gnu.org/licenses/>.
 Info
-    Defines DNSResolver class implementing IDNSResolver.
+    Defines DNSResolver class implementing DNS resolution adapter.
 '''
 
-import re
-import socket
-from typing import override
-from dns.resolver import resolve, NXDOMAIN, NoAnswer
-from dns.exception import Timeout
-from ats_utilities.exceptions.ats_type_error import ATSTypeError
-from ats_utilities.exceptions.ats_value_error import ATSValueError
+from __future__ import annotations
+
+from re import search
+from socket import gethostbyaddr, herror
+
 from ats_utilities.utils.reflection import to_str
-from dns_explorer.core.service.idns_resolver import IDNSResolver
+from ats_utilities.validation.check_type import istype
+from ats_utilities.validation.check_value import not_empty
+from dns.exception import Timeout
+from dns.resolver import NXDOMAIN, NoAnswer, resolve
 
-__author__: str = 'Vladimir Roncevic'
-__copyright__: str = '(C) 2026, https://vroncevic.github.io/dns_explorer'
-__credits__: list[str] = ['Vladimir Roncevic', 'Python Software Foundation']
-__license__: str = 'https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE'
-__version__: str = '1.0.6'
-__maintainer__: str = 'Vladimir Roncevic'
-__email__: str = 'elektron.ronca@gmail.com'
-__status__: str = 'Development'
+__author__ = 'Vladimir Roncevic'
+__copyright__ = '(C) 2026, https://vroncevic.github.io/dns_explorer'
+__credits__ = ['Vladimir Roncevic', 'Python Software Foundation']
+__license__ = 'https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE'
+__version__ = '1.0.7'
+__maintainer__ = 'Vladimir Roncevic'
+__email__ = 'elektron.ronca@gmail.com'
+__status__ = 'Updated'
 
 
-class DNSResolver(IDNSResolver):
+class DNSResolver:
     '''
         Concrete implementation of DNS resolver adapter.
 
@@ -54,115 +55,100 @@ class DNSResolver(IDNSResolver):
                 | __str__ - Returns the DNSResolver as string representation.
     '''
 
-    @override
     def resolve(self, domain: str) -> str | None:
         '''
             Resolves a domain name to an IP address.
 
             :param domain: The domain name to resolve.
-            :type domain: <str>
             :return: The resolved IP address or None.
-            :rtype: <str | None>
             :exceptions:
                 | ATSTypeError: Domain parameter must be a string.
                 | ATSValueError: Domain parameter cannot be empty.
         '''
-        if not isinstance(domain, str):
-            raise ATSTypeError("domain must be a string")
-        if not domain:
-            raise ATSValueError("missing domain name")
+        ctx: str = 'dns_resolver::resolve(...)'
+        istype(domain, str, ctx, 'domain must be a string')
+        not_empty(domain, ctx, 'missing domain name')
 
         try:
             result = resolve(domain)
+
             if result:
                 pattern = r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b'
-                match = re.search(pattern, str(result.rrset))
+                match = search(pattern, str(result.rrset))
+
                 if match:
                     return match.group(0)
+
         except (NXDOMAIN, Timeout, NoAnswer):
             pass
+
         return None
 
-    @override
     def reverse_resolve(self, ip: str) -> list[str] | None:
         '''
             Performs reverse DNS lookup on an IP address.
 
             :param ip: The IP address.
-            :type ip: <str>
             :return: The list of resolved hostnames or None.
-            :rtype: <list[str] | None>
             :exceptions:
                 | ATSTypeError: IP parameter must be a string.
                 | ATSValueError: IP parameter cannot be empty.
         '''
-        if not isinstance(ip, str):
-            raise ATSTypeError("ip must be a string")
-        if not ip:
-            raise ATSValueError("missing ip address")
+        ctx: str = 'dns_resolver::reverse_resolve(...)'
+        istype(ip, str, ctx, 'ip must be a string')
+        not_empty(ip, ctx, 'missing ip address')
 
         try:
-            result = socket.gethostbyaddr(ip)
+            result = gethostbyaddr(ip)
             return [result[0]] + result[1]
-        except socket.herror:
+
+        except herror:
             return None
 
-    @override
     def resolve_record(self, domain: str, record_type: str) -> list[str]:
         '''
             Queries specific DNS records for a domain.
 
             :param domain: The domain name.
-            :type domain: <str>
             :param record_type: The DNS record type.
-            :type record_type: <str>
             :return: List of record values.
-            :rtype: <list[str]>
             :exceptions:
                 | ATSTypeError: Domain parameter must be a string.
                 | ATSValueError: Domain parameter cannot be empty.
                 | ATSTypeError: Record type parameter must be a string.
                 | ATSValueError: Record type parameter cannot be empty.
         '''
-        if not isinstance(domain, str):
-            raise ATSTypeError("domain must be a string")
-
-        if not domain:
-            raise ATSValueError("missing domain name")
-
-        if not isinstance(record_type, str):
-            raise ATSTypeError("record_type must be a string")
-
-        if not record_type:
-            raise ATSValueError("missing record type")
+        ctx: str = 'dns_resolver::resolve_record(...)'
+        istype(domain, str, ctx, 'domain must be a string')
+        not_empty(domain, ctx, 'missing domain name')
+        istype(record_type, str, ctx, 'record_type must be a string')
+        not_empty(record_type, ctx, 'missing record type')
 
         try:
             result = resolve(domain, record_type)
             return [str(rdata) for rdata in result]
+
         except (NXDOMAIN, Timeout, NoAnswer):
             pass
         except Exception:
             pass
+
         return []
 
-    @override
     def is_initialized(self) -> bool:
         '''
             Checks if the resolver is initialized.
 
             :return: True if initialized, False otherwise.
-            :rtype: <bool>
             :exceptions: None.
         '''
         return True
 
-    @override
     def __str__(self) -> str:
         '''
             Returns the DNSResolver as string representation.
 
             :return: The DNSResolver as string representation.
-            :rtype: <str>
             :exceptions: None.
         '''
         return to_str(self)

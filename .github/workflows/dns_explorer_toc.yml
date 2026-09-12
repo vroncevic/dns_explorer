@@ -5,6 +5,9 @@ on:
     paths:
       - '**.md'
 
+permissions:
+  contents: write
+
 jobs:
   generateTOC:
     name: dns_explorer_toc

@@ -9,12 +9,13 @@ Info
 
 from __future__ import annotations
 
-import unittest
+from unittest import TestCase
 
-from dns_explorer.core.model.models import ResolvedDomain, DNSRecord
+from dns_explorer.core.model.dns_record import DNSRecord
+from dns_explorer.core.model.resolved_domain import ResolvedDomain
 
 
-class TestModels(unittest.TestCase):
+class TestModels(TestCase):
     def test_resolved_domain_initialization(self) -> None:
         domain = "google.com"
         ip = "142.251.143.238"
@@ -22,7 +23,7 @@ class TestModels(unittest.TestCase):
         res = ResolvedDomain(domain=domain, ip=ip, reverse=reverse)
         self.assertEqual(res.domain, domain)
         self.assertEqual(res.ip, ip)
-        self.assertEqual(res.reverse, reverse)
+        self.assertEqual(res.reverse, ("dns.google",))
 
     def test_dns_record_initialization(self) -> None:
         record_type = "A"

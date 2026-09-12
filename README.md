@@ -10,7 +10,7 @@ The README is used to introduce the modules and provide instructions on
 how to install the modules, any machine dependencies it may have and any
 other information that should be provided before the modules are installed.
 
-[![dns_explorer python checker](https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_python_checker.yml/badge.svg)](https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_python_checker.yml) [![dns_explorer package checker](https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_package_checker.yml/badge.svg)](https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_package.yml) [![GitHub issues open](https://img.shields.io/github/issues/vroncevic/dns_explorer.svg)](https://github.com/vroncevic/dns_explorer/issues) [![GitHub contributors](https://img.shields.io/github/contributors/vroncevic/dns_explorer.svg)](https://github.com/vroncevic/dns_explorer/graphs/contributors)
+[![dns_explorer python checker](https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_python_checker.yml/badge.svg)](https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_python_checker.yml) [![dns_explorer package checker](https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_package_checker.yml/badge.svg)](https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_package.yml) [![dns_explorer interface checker](https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_interface_checker.yml/badge.svg)](https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_interface_checker.yml) [![dns_explorer isp checker](https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_isp_checker.yml/badge.svg)](https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_isp_checker.yml) [![dns_explorer srp checker](https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_srp_checker.yml/badge.svg)](https://github.com/vroncevic/dns_explorer/actions/workflows/dns_explorer_srp_checker.yml) [![GitHub issues open](https://img.shields.io/github/issues/vroncevic/dns_explorer.svg)](https://github.com/vroncevic/dns_explorer/issues) [![GitHub contributors](https://img.shields.io/github/contributors/vroncevic/dns_explorer.svg)](https://github.com/vroncevic/dns_explorer/graphs/contributors)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -116,8 +116,9 @@ Tool structure
          ├── core/
          │   ├── __init__.py
          │   ├── model/
+         │   │   ├── dns_record.py
          │   │   ├── __init__.py
-         │   │   └── models.py
+         │   │   └── resolved_domain.py
          │   └── service/
          │       ├── engine.py
          │       ├── idns_resolver.py
@@ -172,7 +173,7 @@ Tool structure
              ├── registry.py
              └── validator.py
 
-     10 directories, 49 files
+     10 directories, 50 files
 ```
 </details>
 
@@ -182,16 +183,17 @@ Tool structure
 
 | Name | Stmts | Miss | Cover |
 |------|-------|------|-------|
-| `dns_explorer/__init__.py` | 8 | 0 | 100%|
+| `dns_explorer/__init__.py` | 9 | 0 | 100%|
 | `dns_explorer/core/__init__.py` | 9 | 0 | 100%|
 | `dns_explorer/core/model/__init__.py` | 9 | 0 | 100%|
-| `dns_explorer/core/model/models.py` | 19 | 0 | 100%|
+| `dns_explorer/core/model/dns_record.py` | 14 | 0 | 100%|
+| `dns_explorer/core/model/resolved_domain.py` | 18 | 0 | 100%|
 | `dns_explorer/core/service/__init__.py` | 9 | 0 | 100%|
-| `dns_explorer/core/service/engine.py` | 68 | 0 | 100%|
+| `dns_explorer/core/service/engine.py` | 73 | 0 | 100%|
 | `dns_explorer/core/service/idns_resolver.py` | 17 | 0 | 100%|
-| `dns_explorer/core/service/iservice.py` | 18 | 0 | 100%|
+| `dns_explorer/core/service/iservice.py` | 19 | 0 | 100%|
 | `dns_explorer/engine.py` | 57 | 0 | 100%|
-| `dns_explorer/infrastructure/__init__.py` | 8 | 0 | 100%|
+| `dns_explorer/infrastructure/__init__.py` | 9 | 0 | 100%|
 | `dns_explorer/infrastructure/cli/__init__.py` | 9 | 0 | 100%|
 | `dns_explorer/infrastructure/cli/engine.py` | 43 | 0 | 100%|
 | `dns_explorer/infrastructure/cli/icli.py` | 15 | 0 | 100%|
@@ -217,18 +219,18 @@ Tool structure
 | `dns_explorer/infrastructure/command/resolve_command_executor.py` | 51 | 0 | 100%|
 | `dns_explorer/infrastructure/command/reverse_command_definition.py` | 24 | 0 | 100%|
 | `dns_explorer/infrastructure/command/reverse_command_executor.py` | 46 | 0 | 100%|
-| `dns_explorer/infrastructure/dns_resolver.py` | 66 | 0 | 100%|
+| `dns_explorer/infrastructure/dns_resolver.py` | 55 | 0 | 100%|
 | `dns_explorer/setup/__init__.py` | 9 | 0 | 100%|
 | `dns_explorer/setup/bundle.py` | 23 | 0 | 100%|
 | `dns_explorer/setup/dep_validator.py` | 36 | 0 | 100%|
 | `dns_explorer/setup/dependencies.py` | 19 | 0 | 100%|
-| `dns_explorer/setup/factory.py` | 59 | 0 | 100%|
+| `dns_explorer/setup/factory.py` | 60 | 0 | 100%|
 | `dns_explorer/setup/keys.py` | 27 | 0 | 100%|
 | `dns_explorer/setup/opt_validator.py` | 34 | 0 | 100%|
 | `dns_explorer/setup/options.py` | 12 | 0 | 100%|
 | `dns_explorer/setup/registry.py` | 32 | 0 | 100%|
 | `dns_explorer/setup/validator.py` | 48 | 0 | 100%|
-| **Total** | 1276 | 0 | 100% |
+| **Total** | 1287 | 0 | 100% |
 
 </details>
 
@@ -275,7 +277,7 @@ python3 main.py reverse --ip 8.8.8.8
 ```
 
 ### 📚 Docs
-[![Documentation Status](https://readthedocs.org/projects/dns_explorer/badge/?version=latest)](https://dns-explorer.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/dns-explorer/badge/?version=latest)](https://dns-explorer.readthedocs.io/en/latest/?badge=latest)
 
 More documentation and info at
 

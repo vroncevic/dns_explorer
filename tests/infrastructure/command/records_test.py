@@ -15,7 +15,7 @@ from unittest.mock import Mock
 from ats_utilities.exceptions import ATSValueError
 from dns_explorer.infrastructure.command.records_command_definition import RecordsCommandDefinition
 from dns_explorer.infrastructure.command.records_command_executor import RecordsCommandExecutor
-from dns_explorer.core.model.models import DNSRecord
+from dns_explorer.core.model.dns_record import DNSRecord
 
 
 class MockContextBundle:

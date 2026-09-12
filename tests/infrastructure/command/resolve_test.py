@@ -15,7 +15,7 @@ from unittest.mock import Mock
 from ats_utilities.exceptions import ATSValueError
 from dns_explorer.infrastructure.command.resolve_command_definition import ResolveCommandDefinition
 from dns_explorer.infrastructure.command.resolve_command_executor import ResolveCommandExecutor
-from dns_explorer.core.model.models import ResolvedDomain
+from dns_explorer.core.model.resolved_domain import ResolvedDomain
 
 
 class MockContextBundle:
@@ -29,7 +29,7 @@ class MockService:
     def __init__(self, resolved_domain=None):
         self.resolved_domain = resolved_domain
 
-    def check_dns(self, domain: str, verbose: bool = False) -> ResolvedDomain | None:
+    def check_dns(self, domain: str) -> ResolvedDomain | None:
         return self.resolved_domain
 
 

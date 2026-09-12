@@ -96,5 +96,5 @@ class TestDNSExplorerBundleRegistry(unittest.TestCase):
             DNSExplorerBundleRegistry.create_bundle(None)
 
     def test_get_version(self) -> None:
-        self.assertEqual(DNSExplorerBundleRegistry.get_version(), '1.0.6')
+        self.assertEqual(DNSExplorerBundleRegistry.get_version(), '1.0.7')
 

@@ -21,16 +21,18 @@ Info
 
 from __future__ import annotations
 
-from typing import override
-from dns_explorer.core.service.iservice import IService
+from collections.abc import Sequence
+from typing import Final
+
+from dns_explorer.core.model.dns_record import DNSRecord
+from dns_explorer.core.model.resolved_domain import ResolvedDomain
 from dns_explorer.core.service.idns_resolver import IDNSResolver
-from dns_explorer.core.model.models import ResolvedDomain, DNSRecord
 
 __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2026, https://vroncevic.github.io/dns_explorer'
 __credits__ = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE'
-__version__ = '1.0.6'
+__version__ = '1.0.7'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -43,8 +45,8 @@ class Service:
         It defines:
 
             :attributes:
+                | _SUBDOMAINS - Sequence of subdomains to explore.
                 | _dns_resolver - Adapter for DNS resolution operations.
-                | _SUBDOMAINS - List of subdomains to explore.
             :methods:
                 | __init__ - Initializes the Service.
                 | explore - Explores DNS subdomains.
@@ -54,12 +56,13 @@ class Service:
                 | is_initialized - Checks if the service and its adapters are initialized.
     '''
 
-    _SUBDOMAINS: list[str] = [
+    _SUBDOMAINS: Final[Sequence[str]] = (
         'www', 'mail', 'remote', 'blog', 'webmail', 'server', 'ns', 'smtp',
         'pop', 'imap', 'admin', 'secure', 'vpn', 'dns', 'ftp', 'test',
         'portal', 'host', 'support', 'dev', 'web', 'mx', 'email', 'cloud',
         'owa', 'cdn', 'api', 'exchange', 'mysql', 'wiki', 'cpanel'
-    ]
+    )
+    _dns_resolver: IDNSResolver
 
     def __init__(self, dns_resolver: IDNSResolver) -> None:
         '''
@@ -71,6 +74,7 @@ class Service:
                 | TypeError:  The dns_resolver must be of type IDNSResolver.
         '''
         ctx = 'service::init(...)'
+
         if dns_resolver is None:
             raise ValueError(f'{ctx} - the dns_resolver must be provided')
 
@@ -79,45 +83,46 @@ class Service:
 
         self._dns_resolver = dns_resolver
 
-    def explore(self, domain: str, cluster: int, verbose: bool = False) -> list[ResolvedDomain]:
+    def explore(self, domain: str, cluster: int) -> list[ResolvedDomain]:
         '''
             Explores subdomains of a domain and resolves their DNS and reverse DNS.
 
             :param domain: Base domain name to explore.
             :param cluster: Number of subdomains in cluster to scan.
-            :param verbose: Enable/Disable verbose logging.
             :return: List of resolved domains.
             :exceptions:
-                | ValueError: domain must be provided.
+                | ValueError: The domain must be provided.
         '''
+        ctx = 'service::explore(...)'
+
         if not domain:
-            raise ValueError("domain must be provided.")
+            raise ValueError(f'{ctx} - the domain must be provided')
 
         results: list[ResolvedDomain] = []
 
         for sub_domain in self._SUBDOMAINS:
             sub_domain_final = f'{sub_domain}.{domain}'
-            res = self.check_dns(sub_domain_final, verbose)
+            res = self.check_dns(sub_domain_final)
 
             if res:
                 results.append(res)
 
             for i in range(0, cluster):
                 sub_domain_multi = f'{sub_domain}{i}.{domain}'
-                res = self.check_dns(sub_domain_multi, verbose)
+                res = self.check_dns(sub_domain_multi)
 
                 if res:
                     results.append(res)
 
         return results
 
-    def check_dns(self, domain: str, verbose: bool = False) -> ResolvedDomain | None:
+    def check_dns(self, domain: str) -> ResolvedDomain | None:
         '''
             Executes dns request and reverse DNS lookup.
 
             :param domain: Domain name to check.
-            :param verbose: Enable/Disable verbose option.
             :return: ResolvedDomain instance or None.
+            :exceptions: None.
         '''
         try:
             ip_address = self._dns_resolver.resolve(domain)
@@ -144,10 +149,12 @@ class Service:
             :param domain: Domain name.
             :return: List of DNS records.
             :exceptions:
-                | ValueError: domain must be provided.
+                | ValueError: The domain must be provided.
         '''
+        ctx = 'service::get_records(...)'
+
         if not domain:
-            raise ValueError("domain must be provided.")
+            raise ValueError(f'{ctx} - the domain must be provided')
 
         record_types = ["A", "AAAA", "MX", "NS", "TXT", "SOA"]
         records: list[DNSRecord] = []
@@ -171,14 +178,17 @@ class Service:
             :param ip: IP address.
             :return: List of resolved hostnames.
             :exceptions:
-                | ValueError: ip must be provided.
+                | ValueError: The ip must be provided.
         '''
+        ctx = 'service::reverse_resolve(...)'
+
         if not ip:
-            raise ValueError("ip must be provided.")
+            raise ValueError(f'{ctx} - the ip must be provided')
 
         try:
             res = self._dns_resolver.reverse_resolve(ip)
             return res if res else []
+
         except Exception:
             pass
 
@@ -189,5 +199,6 @@ class Service:
             Checks if the service is initialized.
 
             :return: True if the service is initialized, False otherwise.
+            :exceptions: None.
         '''
         return all([self._dns_resolver is not None, self._dns_resolver.is_initialized()])
