@@ -28,7 +28,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2026, https://vroncevic.github.io/dns_explorer'
 __credits__ = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/dns_explorer/blob/dev/LICENSE'
-__version__ = '1.0.6'
+__version__ = '1.0.7'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -71,7 +71,7 @@ def find_package_data(pkg: str) -> list[str]:
 
 setup(
     name='dns_explorer',
-    version='1.0.6',
+    version='1.0.7',
     description='Python package for dns exploration',
     author='Vladimir Roncevic',
     author_email='elektron.ronca@gmail.com',
